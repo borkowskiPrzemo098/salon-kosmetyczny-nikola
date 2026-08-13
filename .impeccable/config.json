@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "files": [
+          "STRONA1/index.html"
+        ],
+        "createdAt": "2026-08-13T20:36:51.721Z",
+        "reason": "intentional pairing: Helvetica Neue reserved for UI chrome (nav/labels/buttons) only, headings use distinct serif (Iowan Old Style/Georgia) for personality — established since initial build, not a generic all-Helvetica UI"
+      }
+    ]
+  }
+}
