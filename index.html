@@ -159,6 +159,28 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 }
 @media (min-width:900px){ .hero{padding:190px 0 120px;} }
 
+/* ============ SPARKLE PARTICLES (hero) ============ */
+.sparkle-layer{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+}
+.sparkle-layer .spark{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle, var(--gold-400) 0%, transparent 70%);
+  opacity:0;
+  animation: sparkle-drift linear infinite, sparkle-twinkle ease-in-out infinite;
+  will-change:transform, opacity;
+}
+@keyframes sparkle-drift{
+  from{ transform: translate3d(var(--sx,0), 0, 0); }
+  to{ transform: translate3d(calc(var(--sx,0) + var(--dx,20px)), -140px, 0); }
+}
+@keyframes sparkle-twinkle{
+  0%, 100%{ opacity:0; }
+  40%{ opacity:var(--peak,0.55); }
+  60%{ opacity:var(--peak,0.55); }
+}
+.hero-grid, .hero-art{ position:relative; z-index:1; }
+
 .hero-grid{
   display:grid;gap:56px;align-items:center;
 }
@@ -204,9 +226,40 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.in{opacity:1;transform:none;transition:none;}
   html{scroll-behavior:auto;}
+  .sparkle-layer, .petal-layer, .service-row .glint{display:none !important;}
 }
 
 section{padding:88px 0;}
+
+/* ============ PETALS (about section) ============ */
+.about{position:relative;}
+.petal-layer{
+  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
+}
+.petal-layer svg{
+  position:absolute;top:-40px;opacity:0;
+  animation: petal-fall linear infinite, petal-fade ease-in-out infinite;
+  will-change:transform, opacity;
+}
+@keyframes petal-fall{
+  from{ transform: translate3d(0,0,0) rotate(0deg); }
+  to{ transform: translate3d(var(--px,40px), 560px, 0) rotate(var(--pr,340deg)); }
+}
+@keyframes petal-fade{
+  0%{opacity:0;} 12%{opacity:0.5;} 85%{opacity:0.4;} 100%{opacity:0;}
+}
+.about-grid{position:relative;z-index:1;}
+
+/* ============ SERVICE ROW HOVER GLINT ============ */
+.service-row{position:relative;overflow:hidden;}
+.service-row .glint{
+  position:absolute;top:50%;right:14px;width:70px;height:70px;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle, var(--gold-400) 0%, transparent 70%);
+  opacity:0;transform:translateY(-50%) scale(0.4);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.service-row:hover .glint{opacity:0.5;transform:translateY(-50%) scale(1);}
 .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
 .section-head .eyebrow{display:block;margin-bottom:14px;}
 .section-head h2{font-size:clamp(2rem,4.2vw,2.8rem);margin-bottom:16px;}
@@ -443,6 +496,7 @@ footer ul a:hover{color:var(--gold-400);}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
+  <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow reveal in">Manicure · Pedicure · Makijaż · Pielęgnacja twarzy</span>
@@ -472,6 +526,7 @@ footer ul a:hover{color:var(--gold-400);}
 
 <!-- ============ O NAS ============ -->
 <section class="about" id="o-nas">
+  <div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
   <div class="wrap about-grid">
     <div class="about-art reveal">
       <img src="images/about-salon.jpg" alt="Wnętrze salonu kosmetycznego Nikola" loading="lazy">
@@ -511,50 +566,50 @@ footer ul a:hover{color:var(--gold-400);}
 
     <div class="service-panel active" id="panel-manicure" role="tabpanel" aria-labelledby="tab-manicure">
       <div class="service-grid">
-        <div class="service-row"><span><span class="name">Manicure klasyczny</span><span class="desc">opiłowanie, skórki, lakier klasyczny</span></span><span class="dots"></span><span class="price">70 zł</span></div>
-        <div class="service-row"><span><span class="name">Manicure hybrydowy</span><span class="desc">z lakierem hybrydowym, do 3 tyg. trwałości</span></span><span class="dots"></span><span class="price">100 zł</span></div>
-        <div class="service-row"><span><span class="name">Przedłużanie na żelu</span><span class="desc">metoda szablonowa, dowolny kształt</span></span><span class="dots"></span><span class="price">160 zł</span></div>
-        <div class="service-row"><span><span class="name">Uzupełnienie żelu</span><span class="desc">do 3 tygodni od poprzedniej wizyty</span></span><span class="dots"></span><span class="price">130 zł</span></div>
-        <div class="service-row"><span><span class="name">Zdobienia / ombre</span><span class="desc">cena za dłoń, w zależności od wzoru</span></span><span class="dots"></span><span class="price">od 15 zł</span></div>
-        <div class="service-row"><span><span class="name">Manicure japoński</span><span class="desc">wzmocnienie i regeneracja płytki</span></span><span class="dots"></span><span class="price">90 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Manicure klasyczny</span><span class="desc">opiłowanie, skórki, lakier klasyczny</span></span><span class="dots"></span><span class="price">70 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Manicure hybrydowy</span><span class="desc">z lakierem hybrydowym, do 3 tyg. trwałości</span></span><span class="dots"></span><span class="price">100 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Przedłużanie na żelu</span><span class="desc">metoda szablonowa, dowolny kształt</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Uzupełnienie żelu</span><span class="desc">do 3 tygodni od poprzedniej wizyty</span></span><span class="dots"></span><span class="price">130 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Zdobienia / ombre</span><span class="desc">cena za dłoń, w zależności od wzoru</span></span><span class="dots"></span><span class="price">od 15 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Manicure japoński</span><span class="desc">wzmocnienie i regeneracja płytki</span></span><span class="dots"></span><span class="price">90 zł</span></div>
       </div>
     </div>
 
     <div class="service-panel" id="panel-pedicure" role="tabpanel" aria-labelledby="tab-pedicure" hidden>
       <div class="service-grid">
-        <div class="service-row"><span><span class="name">Pedicure klasyczny</span><span class="desc">skórki, opiłowanie, lakier klasyczny</span></span><span class="dots"></span><span class="price">100 zł</span></div>
-        <div class="service-row"><span><span class="name">Pedicure hybrydowy</span><span class="desc">z lakierem hybrydowym</span></span><span class="dots"></span><span class="price">130 zł</span></div>
-        <div class="service-row"><span><span class="name">Pedicure spa</span><span class="desc">peeling, maska, masaż stóp</span></span><span class="dots"></span><span class="price">160 zł</span></div>
-        <div class="service-row"><span><span class="name">Pedicure leczniczy</span><span class="desc">odciski, pękające pięty, wrastające paznokcie</span></span><span class="dots"></span><span class="price">140 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Pedicure klasyczny</span><span class="desc">skórki, opiłowanie, lakier klasyczny</span></span><span class="dots"></span><span class="price">100 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Pedicure hybrydowy</span><span class="desc">z lakierem hybrydowym</span></span><span class="dots"></span><span class="price">130 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Pedicure spa</span><span class="desc">peeling, maska, masaż stóp</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Pedicure leczniczy</span><span class="desc">odciski, pękające pięty, wrastające paznokcie</span></span><span class="dots"></span><span class="price">140 zł</span></div>
       </div>
     </div>
 
     <div class="service-panel" id="panel-makeup" role="tabpanel" aria-labelledby="tab-makeup" hidden>
       <div class="service-grid">
-        <div class="service-row"><span><span class="name">Makijaż dzienny</span><span class="desc">delikatny, naturalny efekt</span></span><span class="dots"></span><span class="price">120 zł</span></div>
-        <div class="service-row"><span><span class="name">Makijaż wieczorowy</span><span class="desc">wyrazisty, na wyjątkowe okazje</span></span><span class="dots"></span><span class="price">160 zł</span></div>
-        <div class="service-row"><span><span class="name">Makijaż ślubny + próbny</span><span class="desc">konsultacja i próba w cenie</span></span><span class="dots"></span><span class="price">350 zł</span></div>
-        <div class="service-row"><span><span class="name">Rzęsy na wybrane okazje</span><span class="desc">kępki, efekt naturalny</span></span><span class="dots"></span><span class="price">40 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Makijaż dzienny</span><span class="desc">delikatny, naturalny efekt</span></span><span class="dots"></span><span class="price">120 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Makijaż wieczorowy</span><span class="desc">wyrazisty, na wyjątkowe okazje</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Makijaż ślubny + próbny</span><span class="desc">konsultacja i próba w cenie</span></span><span class="dots"></span><span class="price">350 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Rzęsy na wybrane okazje</span><span class="desc">kępki, efekt naturalny</span></span><span class="dots"></span><span class="price">40 zł</span></div>
       </div>
     </div>
 
     <div class="service-panel" id="panel-face" role="tabpanel" aria-labelledby="tab-face" hidden>
       <div class="service-grid">
-        <div class="service-row"><span><span class="name">Oczyszczanie manualne</span><span class="desc">peeling, parowanie, ekstrakcja</span></span><span class="dots"></span><span class="price">150 zł</span></div>
-        <div class="service-row"><span><span class="name">Zabieg nawilżający</span><span class="desc">kwas hialuronowy, maska kolagenowa</span></span><span class="dots"></span><span class="price">170 zł</span></div>
-        <div class="service-row"><span><span class="name">Mikrodermabrazja</span><span class="desc">wygładzenie i rozjaśnienie skóry</span></span><span class="dots"></span><span class="price">190 zł</span></div>
-        <div class="service-row"><span><span class="name">Peeling kawitacyjny</span><span class="desc">głębokie oczyszczanie ultradźwiękami</span></span><span class="dots"></span><span class="price">140 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Oczyszczanie manualne</span><span class="desc">peeling, parowanie, ekstrakcja</span></span><span class="dots"></span><span class="price">150 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Zabieg nawilżający</span><span class="desc">kwas hialuronowy, maska kolagenowa</span></span><span class="dots"></span><span class="price">170 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Mikrodermabrazja</span><span class="desc">wygładzenie i rozjaśnienie skóry</span></span><span class="dots"></span><span class="price">190 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Peeling kawitacyjny</span><span class="desc">głębokie oczyszczanie ultradźwiękami</span></span><span class="dots"></span><span class="price">140 zł</span></div>
       </div>
     </div>
 
     <div class="service-panel" id="panel-brows" role="tabpanel" aria-labelledby="tab-brows" hidden>
       <div class="service-grid">
-        <div class="service-row"><span><span class="name">Henna brwi i rzęs</span><span class="desc">z regulacją brwi</span></span><span class="dots"></span><span class="price">60 zł</span></div>
-        <div class="service-row"><span><span class="name">Laminacja brwi</span><span class="desc">utrwalenie kształtu na ok. 6 tyg.</span></span><span class="dots"></span><span class="price">90 zł</span></div>
-        <div class="service-row"><span><span class="name">Laminacja rzęs</span><span class="desc">z odżywką, efekt lifting</span></span><span class="dots"></span><span class="price">120 zł</span></div>
-        <div class="service-row"><span><span class="name">Przedłużanie rzęs 1:1</span><span class="desc">metoda klasyczna</span></span><span class="dots"></span><span class="price">180 zł</span></div>
-        <div class="service-row"><span><span class="name">Przedłużanie rzęs objętościowe</span><span class="desc">efekt mega volume</span></span><span class="dots"></span><span class="price">220 zł</span></div>
-        <div class="service-row"><span><span class="name">Makijaż permanentny brwi</span><span class="desc">metoda pudrowa</span></span><span class="dots"></span><span class="price">od 500 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Henna brwi i rzęs</span><span class="desc">z regulacją brwi</span></span><span class="dots"></span><span class="price">60 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Laminacja brwi</span><span class="desc">utrwalenie kształtu na ok. 6 tyg.</span></span><span class="dots"></span><span class="price">90 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Laminacja rzęs</span><span class="desc">z odżywką, efekt lifting</span></span><span class="dots"></span><span class="price">120 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Przedłużanie rzęs 1:1</span><span class="desc">metoda klasyczna</span></span><span class="dots"></span><span class="price">180 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Przedłużanie rzęs objętościowe</span><span class="desc">efekt mega volume</span></span><span class="dots"></span><span class="price">220 zł</span></div>
+        <div class="service-row"><span class="glint"></span><span><span class="name">Makijaż permanentny brwi</span><span class="desc">metoda pudrowa</span></span><span class="dots"></span><span class="price">od 500 zł</span></div>
       </div>
     </div>
 
@@ -860,6 +915,91 @@ if('IntersectionObserver' in window){
   revealEls.forEach(el=>io.observe(el));
 } else {
   revealEls.forEach(el=>el.classList.add('in'));
+}
+
+/* particle effects — skipped entirely for prefers-reduced-motion */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if(!reduceMotion){
+
+  /* 1) hero gold sparkles, with subtle mouse parallax */
+  const sparkleLayer = document.getElementById('sparkleLayer');
+  if(sparkleLayer){
+    const SPARK_COUNT = 16;
+    for(let i=0;i<SPARK_COUNT;i++){
+      const s = document.createElement('span');
+      s.className = 'spark';
+      const size = 3 + Math.random()*4;
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.left = (Math.random()*100)+'%';
+      s.style.top = (30 + Math.random()*65)+'%';
+      s.style.setProperty('--dx', (Math.random()*40-20)+'px');
+      s.style.setProperty('--peak', (0.3 + Math.random()*0.35).toFixed(2));
+      s.style.animationDuration = (7 + Math.random()*8)+'s, ' + (3 + Math.random()*3)+'s';
+      s.style.animationDelay = (-Math.random()*10)+'s, ' + (-Math.random()*5)+'s';
+      sparkleLayer.appendChild(s);
+    }
+    const heroEl = document.querySelector('.hero');
+    if(heroEl && window.matchMedia('(hover:hover)').matches){
+      heroEl.addEventListener('mousemove', (e)=>{
+        const r = heroEl.getBoundingClientRect();
+        const px = (e.clientX - r.left)/r.width - 0.5;
+        const py = (e.clientY - r.top)/r.height - 0.5;
+        sparkleLayer.style.transform = `translate3d(${px*-12}px, ${py*-8}px, 0)`;
+      });
+      heroEl.addEventListener('mouseleave', ()=>{ sparkleLayer.style.transform = ''; });
+    }
+  }
+
+  /* 2) falling petals in "O nas", spawned once the section enters view */
+  const petalLayer = document.getElementById('petalLayer');
+  const petalSVG = (hue)=>`<svg viewBox="0 0 40 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 4 C28 4 34 12 34 20 C34 28 28 36 20 36 C12 36 6 28 6 20 C6 12 12 4 20 4Z" fill="${hue}"/>
+  </svg>`;
+  if(petalLayer){
+    const petalColors = ['var(--rose-300)','var(--rose-200)','var(--gold-400)'];
+    let petalsSpawned = false;
+    const spawnPetals = ()=>{
+      if(petalsSpawned) return;
+      petalsSpawned = true;
+      const PETAL_COUNT = 5;
+      for(let i=0;i<PETAL_COUNT;i++){
+        const p = document.createElement('div');
+        const size = 16 + Math.random()*14;
+        p.style.width = size+'px';
+        p.style.height = size+'px';
+        p.style.left = (Math.random()*100)+'%';
+        p.style.setProperty('--px', (Math.random()*80-40)+'px');
+        p.style.setProperty('--pr', (240+Math.random()*240)+'deg');
+        p.style.animationDuration = (9 + Math.random()*7)+'s, ' + (9 + Math.random()*7)+'s';
+        p.style.animationDelay = (-Math.random()*14)+'s, ' + (-Math.random()*14)+'s';
+        p.innerHTML = petalSVG(petalColors[i % petalColors.length]);
+        petalLayer.appendChild(p);
+      }
+    };
+    if('IntersectionObserver' in window){
+      const petalIO = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{ if(e.isIntersecting){ spawnPetals(); petalIO.disconnect(); } });
+      }, {threshold:0.2});
+      petalIO.observe(document.querySelector('.about'));
+    } else {
+      spawnPetals();
+    }
+  }
+
+  /* 3) service card hover glint follows cursor */
+  document.querySelectorAll('.service-row').forEach(row=>{
+    const glint = row.querySelector('.glint');
+    if(!glint || !window.matchMedia('(hover:hover)').matches) return;
+    row.addEventListener('mousemove', (e)=>{
+      const r = row.getBoundingClientRect();
+      glint.style.left = (e.clientX - r.left)+'px';
+      glint.style.top = (e.clientY - r.top)+'px';
+      glint.style.right = 'auto';
+      glint.style.transform = 'translate(-50%,-50%) scale(1)';
+    });
+  });
 }
 
 /* services tabs */
