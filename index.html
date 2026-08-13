@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salon Kosmetyczny Nikola — Manicure, Pedicure, Makijaż, Zabiegi na twarz</title>
+<meta name="description" content="Salon Kosmetyczny Nikola — profesjonalny manicure, pedicure, makijaż, zabiegi na twarz oraz stylizacja brwi i rzęs. Umów wizytę już dziś.">
+<style>
+:root{
+  --rose-50:#fdf3f2;
+  --rose-100:#f9e4e1;
+  --rose-200:#f2cdc6;
+  --rose-300:#e6ab9f;
+  --rose-400:#d68873;
+  --rose-500:#c06a52;
+  --rose-600:#9e5140;
+  --rose-900:#3f2620;
+  --beige-50:#fbf8f3;
+  --beige-100:#f4ede1;
+  --gold-400:#c9a24b;
+  --gold-500:#b3872f;
+  --gold-600:#8f6c24;
+  --ink:#332420;
+  --ink-soft:#6b5650;
+  --paper:#fffdfb;
+  --line:#e9dcd2;
+  --shadow-color: 20 15 10;
+  --focus: #8f6c24;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:"Georgia","Iowan Old Style","Palatino Linotype",serif;
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{
+  font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Times New Roman",serif;
+  font-weight:400;
+  margin:0;
+  color:var(--rose-900);
+  letter-spacing:0.01em;
+}
+p{margin:0;line-height:1.65;color:var(--ink-soft);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+button{font:inherit;cursor:pointer;}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;}
+
+.eyebrow{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold-600);
+  font-weight:600;
+}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+@media (min-width:900px){ .wrap{padding:0 48px;} }
+
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+.skip-link{
+  position:fixed;top:-60px;left:16px;z-index:200;
+  background:var(--rose-900);color:#fff;padding:12px 20px;border-radius:0 0 10px 10px;
+  transition:top .25s ease;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.9rem;
+}
+.skip-link:focus{top:0;}
+
+/* ============ HEADER ============ */
+header.site{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,253,251,0.85);
+  backdrop-filter:blur(10px) saturate(140%);
+  -webkit-backdrop-filter:blur(10px) saturate(140%);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s ease, box-shadow .3s ease;
+}
+header.site.scrolled{
+  border-bottom-color:var(--line);
+  box-shadow:0 10px 30px -20px rgba(var(--shadow-color)/0.4);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  height:76px;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;
+  font-size:1.35rem;letter-spacing:0.04em;color:var(--rose-900);
+}
+.brand .mark{width:30px;height:30px;flex:none;}
+.brand strong{font-weight:400;}
+.brand small{
+  display:block;font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:0.55rem;letter-spacing:0.28em;color:var(--gold-600);text-transform:uppercase;
+  margin-top:2px;
+}
+
+nav.links{display:none;gap:2.1rem;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.86rem;letter-spacing:0.02em;}
+@media (min-width:900px){ nav.links{display:flex;} }
+nav.links a{position:relative;padding:6px 0;color:var(--ink);}
+nav.links a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold-500);
+  transition:right .28s ease;
+}
+nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
+
+.header-cta{
+  display:none;align-items:center;gap:14px;
+}
+@media (min-width:900px){ .header-cta{display:flex;} }
+.btn{
+  font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:0.82rem;letter-spacing:0.05em;text-transform:uppercase;font-weight:600;
+  padding:13px 26px;border-radius:2px;border:1px solid var(--rose-900);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, background .25s ease, color .25s ease;
+}
+.btn-primary{background:var(--rose-900);color:#fff;}
+.btn-primary:hover{background:var(--rose-600);border-color:var(--rose-600);transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(var(--shadow-color)/0.55);}
+.btn-ghost{background:transparent;color:var(--rose-900);}
+.btn-ghost:hover{background:var(--rose-900);color:#fff;transform:translateY(-2px);}
+
+.burger{
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:2px;
+}
+@media (min-width:900px){ .burger{display:none;} }
+.burger svg{width:18px;height:18px;}
+
+.mobile-menu{
+  position:fixed;inset:76px 0 0 0;z-index:99;background:var(--beige-50);
+  transform:translateY(-8px);opacity:0;pointer-events:none;
+  transition:opacity .3s ease, transform .3s ease;
+  display:flex;flex-direction:column;padding:32px 24px;gap:4px;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+}
+.mobile-menu.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+.mobile-menu a{
+  padding:16px 4px;border-bottom:1px solid var(--line);font-size:1.05rem;color:var(--rose-900);
+}
+.mobile-menu .btn{margin-top:20px;justify-content:center;}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;padding:150px 0 90px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 900px 500px at 82% -10%, var(--rose-100) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 40%, var(--beige-100) 0%, transparent 55%),
+    var(--paper);
+}
+@media (min-width:900px){ .hero{padding:190px 0 120px;} }
+
+.hero-grid{
+  display:grid;gap:56px;align-items:center;
+}
+@media (min-width:960px){ .hero-grid{grid-template-columns:1.05fr 0.95fr;gap:40px;} }
+
+.hero h1{
+  font-size:clamp(2.6rem,6.4vw,4.4rem);line-height:1.03;margin:18px 0 22px;
+}
+.hero h1 em{font-style:italic;color:var(--gold-600);}
+.hero p.lead{font-size:1.12rem;max-width:46ch;margin-bottom:34px;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:44px;}
+
+.hero-stats{
+  display:flex;gap:34px;flex-wrap:wrap;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+}
+.hero-stats div strong{
+  display:block;font-family:"Iowan Old Style",Georgia,serif;font-size:1.9rem;color:var(--rose-900);
+}
+.hero-stats div span{font-size:0.74rem;letter-spacing:0.06em;color:var(--ink-soft);text-transform:uppercase;}
+
+.hero-art{position:relative;}
+.hero-art svg{width:100%;height:auto;}
+.hero-badge{
+  position:absolute;bottom:-22px;left:-10px;background:var(--paper);
+  border:1px solid var(--line);padding:16px 20px;border-radius:2px;
+  box-shadow:0 24px 50px -30px rgba(var(--shadow-color)/0.5);
+  display:flex;align-items:center;gap:12px;max-width:230px;
+}
+@media (min-width:640px){ .hero-badge{left:-40px;} }
+.hero-badge svg{width:34px;height:34px;flex:none;color:var(--gold-500);}
+.hero-badge strong{display:block;font-size:0.95rem;color:var(--rose-900);font-family:"Iowan Old Style",Georgia,serif;}
+.hero-badge span{font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.72rem;color:var(--ink-soft);}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.08s;}
+.reveal-delay-2{transition-delay:.16s;}
+.reveal-delay-3{transition-delay:.24s;}
+.reveal-delay-4{transition-delay:.32s;}
+@media (prefers-reduced-motion: reduce){
+  .reveal, .reveal.in{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+section{padding:88px 0;}
+.section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+.section-head .eyebrow{display:block;margin-bottom:14px;}
+.section-head h2{font-size:clamp(2rem,4.2vw,2.8rem);margin-bottom:16px;}
+.divider{
+  width:64px;height:2px;margin:20px auto 0;
+  background:linear-gradient(90deg,transparent,var(--gold-500),transparent);
+}
+
+/* ============ ABOUT ============ */
+.about{background:var(--beige-50);}
+.about-grid{display:grid;gap:48px;align-items:center;}
+@media (min-width:940px){ .about-grid{grid-template-columns:0.9fr 1.1fr;gap:64px;} }
+.about-art svg{width:100%;height:auto;}
+.about-copy p{margin-bottom:18px;font-size:1.04rem;}
+.about-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px;}
+.about-list li{display:flex;gap:14px;align-items:flex-start;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.94rem;color:var(--ink);}
+.about-list svg{width:20px;height:20px;flex:none;color:var(--gold-500);margin-top:2px;}
+
+/* ============ SERVICES ============ */
+.services-tabs{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;
+  font-family:"Helvetica Neue",Arial,sans-serif;
+}
+.tab-btn{
+  padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);
+  font-size:0.82rem;letter-spacing:0.03em;color:var(--ink-soft);
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.tab-btn:hover{border-color:var(--gold-400);color:var(--rose-900);}
+.tab-btn[aria-selected="true"]{background:var(--rose-900);border-color:var(--rose-900);color:#fff;}
+
+.service-panel{display:none;}
+.service-panel.active{display:block;}
+.service-grid{display:grid;gap:20px;}
+@media (min-width:700px){ .service-grid{grid-template-columns:repeat(2,1fr);} }
+
+.service-row{
+  display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+  padding:22px 26px;border:1px solid var(--line);border-radius:2px;background:var(--paper);
+  transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.service-row:hover{border-color:var(--gold-400);box-shadow:0 20px 40px -28px rgba(var(--shadow-color)/0.45);transform:translateY(-3px);}
+.service-row .name{font-family:"Iowan Old Style",Georgia,serif;font-size:1.08rem;color:var(--rose-900);}
+.service-row .desc{display:block;margin-top:4px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.82rem;color:var(--ink-soft);}
+.service-row .price{
+  white-space:nowrap;font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;color:var(--gold-600);font-size:1.02rem;
+}
+.dots{flex:1;border-bottom:1px dotted var(--line);margin:0 4px 6px;min-width:12px;}
+.service-note{text-align:center;margin-top:36px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.86rem;color:var(--ink-soft);}
+
+/* ============ GALLERY ============ */
+.gallery{background:var(--rose-900);}
+.gallery .section-head h2, .gallery .section-head p{color:#fff;}
+.gallery .eyebrow{color:var(--gold-400);}
+.gallery-grid{
+  display:grid;gap:16px;grid-template-columns:repeat(2,1fr);
+}
+@media (min-width:720px){ .gallery-grid{grid-template-columns:repeat(4,1fr);} }
+.gallery-item{
+  position:relative;aspect-ratio:3/4;border-radius:2px;overflow:hidden;
+  background:var(--rose-600);
+}
+.gallery-item svg{width:100%;height:100%;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+.gallery-item:hover svg{transform:scale(1.06);}
+.gallery-item .cap{
+  position:absolute;left:0;right:0;bottom:0;padding:16px;
+  background:linear-gradient(0deg,rgba(20,10,8,0.68),transparent);
+  color:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.78rem;letter-spacing:0.04em;
+}
+
+/* ============ REVIEWS ============ */
+.reviews-track{
+  display:grid;gap:22px;
+}
+@media (min-width:760px){ .reviews-track{grid-template-columns:repeat(3,1fr);} }
+.review-card{
+  background:var(--beige-50);border:1px solid var(--line);border-radius:2px;padding:32px 28px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.stars{display:flex;gap:4px;color:var(--gold-500);}
+.stars svg{width:16px;height:16px;}
+.review-card p.quote{font-style:italic;color:var(--ink);font-size:1rem;}
+.review-who{display:flex;align-items:center;gap:12px;margin-top:auto;}
+.review-avatar{width:42px;height:42px;border-radius:50%;flex:none;}
+.review-who strong{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.88rem;color:var(--rose-900);}
+.review-who span{font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.74rem;color:var(--ink-soft);}
+
+/* ============ CONTACT ============ */
+.contact{background:var(--beige-50);}
+.contact-grid{display:grid;gap:40px;}
+@media (min-width:980px){ .contact-grid{grid-template-columns:0.95fr 1.05fr;gap:60px;} }
+
+.info-card{background:var(--paper);border:1px solid var(--line);padding:36px;border-radius:2px;}
+.info-card h3{font-size:1.5rem;margin-bottom:22px;}
+.info-list{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:20px;}
+.info-list li{display:flex;gap:16px;align-items:flex-start;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.92rem;}
+.info-list svg{width:22px;height:22px;flex:none;color:var(--gold-500);}
+.info-list strong{display:block;color:var(--rose-900);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px;}
+.info-list a{color:var(--ink);border-bottom:1px solid transparent;}
+.info-list a:hover{border-color:var(--gold-500);}
+
+.hours-table{width:100%;border-collapse:collapse;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.88rem;margin-bottom:8px;}
+.hours-table td{padding:8px 0;border-bottom:1px solid var(--line);}
+.hours-table td:last-child{text-align:right;font-weight:600;color:var(--rose-900);}
+.hours-table tr:last-child td{border-bottom:none;}
+.hours-today{color:var(--gold-600) !important;}
+
+.social-row{display:flex;gap:12px;margin-top:24px;}
+.social-row a{
+  width:40px;height:40px;border:1px solid var(--line);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:border-color .25s ease, background .25s ease, color .25s ease;
+}
+.social-row a:hover{background:var(--rose-900);border-color:var(--rose-900);color:#fff;}
+.social-row svg{width:17px;height:17px;}
+
+.map-card{
+  position:relative;border-radius:2px;overflow:hidden;border:1px solid var(--line);
+  min-height:340px;background:var(--rose-100);
+}
+.map-card svg{width:100%;height:100%;position:absolute;inset:0;}
+.map-pin{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);
+  display:flex;flex-direction:column;align-items:center;
+}
+.map-pin svg{position:static;width:40px;height:40px;color:var(--rose-600);filter:drop-shadow(0 8px 10px rgba(20,10,8,0.35));}
+.map-label{
+  position:absolute;left:20px;bottom:20px;background:var(--paper);padding:12px 18px;border-radius:2px;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.82rem;box-shadow:0 14px 30px -18px rgba(var(--shadow-color)/0.5);
+}
+.map-label strong{display:block;color:var(--rose-900);font-family:"Iowan Old Style",Georgia,serif;font-size:0.98rem;}
+
+/* form */
+.booking-form{margin-top:28px;display:grid;gap:16px;}
+.field{display:flex;flex-direction:column;gap:6px;font-family:"Helvetica Neue",Arial,sans-serif;}
+.field label{font-size:0.76rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);}
+.field input,.field select,.field textarea{
+  border:1px solid var(--line);background:var(--paper);padding:13px 14px;border-radius:2px;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.94rem;color:var(--ink);
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold-500);box-shadow:0 0 0 3px rgba(179,135,47,0.15);}
+.field-row{display:grid;gap:16px;}
+@media (min-width:520px){ .field-row{grid-template-columns:1fr 1fr;} }
+.form-msg{
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.86rem;padding:14px 16px;border-radius:2px;
+  display:none;align-items:center;gap:10px;
+}
+.form-msg.show{display:flex;}
+.form-msg.success{background:#eaf3ea;color:#2c5e34;}
+.form-msg svg{width:18px;height:18px;flex:none;}
+
+/* ============ CTA BAND ============ */
+.cta-band{
+  background:linear-gradient(120deg,var(--rose-900),var(--rose-600));
+  color:#fff;text-align:center;padding:80px 0;
+}
+.cta-band h2{color:#fff;font-size:clamp(1.9rem,4vw,2.6rem);margin-bottom:16px;}
+.cta-band p{color:rgba(255,255,255,0.82);max-width:52ch;margin:0 auto 32px;}
+.cta-band .btn-primary{background:#fff;color:var(--rose-900);border-color:#fff;}
+.cta-band .btn-primary:hover{background:var(--gold-400);border-color:var(--gold-400);color:#fff;}
+
+/* ============ FOOTER ============ */
+footer.site{background:var(--rose-900);color:rgba(255,255,255,0.78);padding:64px 0 28px;}
+.footer-grid{display:grid;gap:40px;margin-bottom:48px;}
+@media (min-width:820px){ .footer-grid{grid-template-columns:1.3fr 1fr 1fr 1fr;} }
+.footer-brand .brand{color:#fff;}
+.footer-brand p{color:rgba(255,255,255,0.68);margin-top:14px;max-width:32ch;}
+footer h4{color:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.9rem;}
+footer ul a{color:rgba(255,255,255,0.78);}
+footer ul a:hover{color:var(--gold-400);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.14);padding-top:24px;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.55);
+}
+
+/* back to top */
+.to-top{
+  position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
+  background:var(--rose-900);color:#fff;display:flex;align-items:center;justify-content:center;
+  border:none;box-shadow:0 14px 30px -14px rgba(var(--shadow-color)/0.6);
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .3s ease, transform .3s ease, background .25s ease;
+  z-index:80;
+}
+.to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
+.to-top:hover{background:var(--gold-500);}
+.to-top svg{width:18px;height:18px;}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Przejdź do treści</a>
+
+<header class="site" id="siteHeader">
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="Nikola — strona główna">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" stroke="#b3872f" stroke-width="1"/>
+        <path d="M13 26 C13 18, 18 13, 20 10 C22 13, 27 18, 27 26" stroke="#9e5140" stroke-width="1.4" fill="none"/>
+        <path d="M20 10 C20 16, 20 21, 20 27" stroke="#9e5140" stroke-width="1" fill="none"/>
+      </svg>
+      <span><strong>Nikola</strong><small>Salon Kosmetyczny</small></span>
+    </a>
+    <nav class="links" aria-label="Nawigacja główna">
+      <a href="#o-nas">O nas</a>
+      <a href="#uslugi">Usługi</a>
+      <a href="#galeria">Galeria</a>
+      <a href="#opinie">Opinie</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:+48512345678" class="btn btn-ghost">512 345 678</a>
+      <a href="#kontakt" class="btn btn-primary">Umów wizytę</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Otwórz menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#o-nas">O nas</a>
+  <a href="#uslugi">Usługi</a>
+  <a href="#galeria">Galeria</a>
+  <a href="#opinie">Opinie</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#kontakt" class="btn btn-primary">Umów wizytę</a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow reveal in">Manicure · Pedicure · Makijaż · Pielęgnacja twarzy</span>
+      <h1 class="reveal in reveal-delay-1">Piękno, na które <em>zasługujesz</em>, w sercu Krakowa</h1>
+      <p class="lead reveal in reveal-delay-2">Salon Kosmetyczny Nikola to kameralne miejsce, w którym łączymy precyzyjne rzemiosło z chwilą prawdziwego relaksu. Umów się na wizytę i poczuj różnicę.</p>
+      <div class="hero-actions reveal in reveal-delay-3">
+        <a href="#kontakt" class="btn btn-primary">Zarezerwuj termin</a>
+        <a href="#uslugi" class="btn btn-ghost">Zobacz cennik</a>
+      </div>
+      <div class="hero-stats reveal in reveal-delay-4">
+        <div><strong>9&nbsp;lat</strong><span>Doświadczenia</span></div>
+        <div><strong>4200+</strong><span>Zadowolonych klientek</span></div>
+        <div><strong>4.9/5</strong><span>Średnia ocena</span></div>
+      </div>
+    </div>
+    <div class="hero-art reveal in reveal-delay-2">
+      <svg viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja: kosmetyczka pielęgnująca dłoń klientki">
+        <defs>
+          <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f9e4e1"/>
+            <stop offset="1" stop-color="#f4ede1"/>
+          </linearGradient>
+          <linearGradient id="skinG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#e6ab9f"/>
+            <stop offset="1" stop-color="#d68873"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="480" height="520" rx="6" fill="url(#heroBg)"/>
+        <circle cx="380" cy="90" r="70" fill="#f2cdc6" opacity="0.6"/>
+        <circle cx="60" cy="460" r="90" fill="#c9a24b" opacity="0.15"/>
+        <!-- table -->
+        <rect x="40" y="360" width="400" height="14" rx="4" fill="#e9dcd2"/>
+        <!-- forearm -->
+        <path d="M120 360 C120 300 150 260 210 250 L 340 250 C 360 250 370 265 365 285 L 250 320 C 220 328 190 345 175 360 Z" fill="url(#skinG)"/>
+        <!-- hand receiving manicure -->
+        <ellipse cx="330" cy="290" rx="46" ry="30" fill="url(#skinG)"/>
+        <g fill="#f7ece7">
+          <rect x="356" y="272" width="34" height="12" rx="6"/>
+          <rect x="360" y="286" width="36" height="12" rx="6"/>
+          <rect x="358" y="300" width="32" height="12" rx="6"/>
+        </g>
+        <g fill="#9e5140" opacity="0.85">
+          <rect x="382" y="272" width="10" height="12" rx="4"/>
+          <rect x="388" y="286" width="10" height="12" rx="4"/>
+          <rect x="382" y="300" width="10" height="12" rx="4"/>
+        </g>
+        <!-- cosmetologist hand with brush -->
+        <path d="M300 230 C320 220 345 222 358 238 C368 250 362 262 348 262 C 336 262 322 250 308 246 Z" fill="url(#skinG)"/>
+        <rect x="352" y="234" width="70" height="8" rx="4" fill="#b3872f" transform="rotate(18 352 234)"/>
+        <!-- decorative florals -->
+        <g stroke="#9e5140" stroke-width="1.3" fill="none" opacity="0.55">
+          <path d="M60 120 C40 100 40 70 60 55 C80 70 80 100 60 120Z"/>
+          <path d="M60 120 C80 100 110 100 125 118 C110 135 80 135 60 120Z"/>
+          <path d="M60 120 C40 138 40 168 60 183 C80 168 80 138 60 120Z"/>
+          <path d="M60 120 C40 100 10 100 -5 118" opacity="0"/>
+        </g>
+        <circle cx="60" cy="120" r="6" fill="#b3872f"/>
+        <g stroke="#c06a52" stroke-width="1" fill="none" opacity="0.4">
+          <path d="M420 420 C430 400 430 380 415 365"/>
+          <path d="M430 440 C445 425 450 405 440 385"/>
+        </g>
+      </svg>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.4 5.5L20 9l-4.4 3.8L16.9 19 12 15.8 7.1 19l1.3-6.2L4 9l5.6-.5L12 3z"/></svg>
+        <span><strong>Salon Roku 2025</strong><span>wyróżnienie regionalne w kategorii uroda</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ O NAS ============ -->
+<section class="about" id="o-nas">
+  <div class="wrap about-grid">
+    <div class="about-art reveal">
+      <svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja wnętrza salonu kosmetycznego">
+        <rect x="0" y="0" width="420" height="460" rx="6" fill="#f4ede1"/>
+        <rect x="30" y="60" width="360" height="340" rx="4" fill="#fffdfb" stroke="#e9dcd2"/>
+        <circle cx="210" cy="150" r="58" fill="#f2cdc6"/>
+        <path d="M210 108 C230 108 246 124 246 144 C246 172 226 192 210 205 C194 192 174 172 174 144 C174 124 190 108 210 108Z" fill="#e6ab9f" opacity="0.7"/>
+        <rect x="90" y="250" width="240" height="10" rx="5" fill="#e9dcd2"/>
+        <rect x="90" y="280" width="180" height="10" rx="5" fill="#e9dcd2"/>
+        <rect x="90" y="310" width="210" height="10" rx="5" fill="#e9dcd2"/>
+        <circle cx="335" cy="345" r="28" fill="#c9a24b" opacity="0.25"/>
+        <circle cx="60" cy="345" r="18" fill="#c06a52" opacity="0.2"/>
+        <rect x="0" y="420" width="420" height="40" fill="#e9dcd2" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="about-copy reveal reveal-delay-1">
+      <span class="eyebrow">Poznaj nas</span>
+      <h2 style="margin-top:14px;font-size:clamp(1.9rem,4vw,2.5rem);">Ponad 9 lat dbania o piękno kobiet z Krakowa</h2>
+      <p>Salon Kosmetyczny Nikola powstał w 2016 roku z pasji do rzemiosła i przekonania, że każda wizyta powinna być momentem oddechu, nie tylko zabiegiem. Nasz zespół to certyfikowane stylistki paznokci, wizażystki i kosmetolożki, które stale podnoszą kwalifikacje na szkoleniach w kraju i za granicą.</p>
+      <p>Pracujemy wyłącznie na sprawdzonych, dermatologicznie przetestowanych produktach, w warunkach pełnej sterylności. Każdą klientkę traktujemy indywidualnie — od doboru koloru po pielęgnację, którą polecimy na dni między wizytami.</p>
+      <ul class="about-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l5 5L20 7"/></svg>Certyfikowany, doświadczony zespół</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l5 5L20 7"/></svg>Pełna sterylizacja narzędzi zgodna z normami sanitarnymi</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l5 5L20 7"/></svg>Produkty premium, przyjazne skórze wrażliwej</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12l5 5L20 7"/></svg>Kameralna, spokojna atmosfera z herbatą i kawą</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USŁUGI ============ -->
+<section class="services" id="uslugi">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cennik</span>
+      <h2>Nasze usługi</h2>
+      <p>Pełna oferta zabiegów kosmetycznych — ceny orientacyjne, ostateczna wycena ustalana jest podczas konsultacji.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="services-tabs" role="tablist" aria-label="Kategorie usług">
+      <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-manicure" id="tab-manicure">Manicure</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-pedicure" id="tab-pedicure">Pedicure</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-makeup" id="tab-makeup">Makijaż</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-face" id="tab-face">Twarz</button>
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-brows" id="tab-brows">Brwi i rzęsy</button>
+    </div>
+
+    <div class="service-panel active" id="panel-manicure" role="tabpanel" aria-labelledby="tab-manicure">
+      <div class="service-grid">
+        <div class="service-row"><span><span class="name">Manicure klasyczny</span><span class="desc">opiłowanie, skórki, lakier klasyczny</span></span><span class="dots"></span><span class="price">70 zł</span></div>
+        <div class="service-row"><span><span class="name">Manicure hybrydowy</span><span class="desc">z lakierem hybrydowym, do 3 tyg. trwałości</span></span><span class="dots"></span><span class="price">100 zł</span></div>
+        <div class="service-row"><span><span class="name">Przedłużanie na żelu</span><span class="desc">metoda szablonowa, dowolny kształt</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span><span class="name">Uzupełnienie żelu</span><span class="desc">do 3 tygodni od poprzedniej wizyty</span></span><span class="dots"></span><span class="price">130 zł</span></div>
+        <div class="service-row"><span><span class="name">Zdobienia / ombre</span><span class="desc">cena za dłoń, w zależności od wzoru</span></span><span class="dots"></span><span class="price">od 15 zł</span></div>
+        <div class="service-row"><span><span class="name">Manicure japoński</span><span class="desc">wzmocnienie i regeneracja płytki</span></span><span class="dots"></span><span class="price">90 zł</span></div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-pedicure" role="tabpanel" aria-labelledby="tab-pedicure" hidden>
+      <div class="service-grid">
+        <div class="service-row"><span><span class="name">Pedicure klasyczny</span><span class="desc">skórki, opiłowanie, lakier klasyczny</span></span><span class="dots"></span><span class="price">100 zł</span></div>
+        <div class="service-row"><span><span class="name">Pedicure hybrydowy</span><span class="desc">z lakierem hybrydowym</span></span><span class="dots"></span><span class="price">130 zł</span></div>
+        <div class="service-row"><span><span class="name">Pedicure spa</span><span class="desc">peeling, maska, masaż stóp</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span><span class="name">Pedicure leczniczy</span><span class="desc">odciski, pękające pięty, wrastające paznokcie</span></span><span class="dots"></span><span class="price">140 zł</span></div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-makeup" role="tabpanel" aria-labelledby="tab-makeup" hidden>
+      <div class="service-grid">
+        <div class="service-row"><span><span class="name">Makijaż dzienny</span><span class="desc">delikatny, naturalny efekt</span></span><span class="dots"></span><span class="price">120 zł</span></div>
+        <div class="service-row"><span><span class="name">Makijaż wieczorowy</span><span class="desc">wyrazisty, na wyjątkowe okazje</span></span><span class="dots"></span><span class="price">160 zł</span></div>
+        <div class="service-row"><span><span class="name">Makijaż ślubny + próbny</span><span class="desc">konsultacja i próba w cenie</span></span><span class="dots"></span><span class="price">350 zł</span></div>
+        <div class="service-row"><span><span class="name">Rzęsy na wybrane okazje</span><span class="desc">kępki, efekt naturalny</span></span><span class="dots"></span><span class="price">40 zł</span></div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-face" role="tabpanel" aria-labelledby="tab-face" hidden>
+      <div class="service-grid">
+        <div class="service-row"><span><span class="name">Oczyszczanie manualne</span><span class="desc">peeling, parowanie, ekstrakcja</span></span><span class="dots"></span><span class="price">150 zł</span></div>
+        <div class="service-row"><span><span class="name">Zabieg nawilżający</span><span class="desc">kwas hialuronowy, maska kolagenowa</span></span><span class="dots"></span><span class="price">170 zł</span></div>
+        <div class="service-row"><span><span class="name">Mikrodermabrazja</span><span class="desc">wygładzenie i rozjaśnienie skóry</span></span><span class="dots"></span><span class="price">190 zł</span></div>
+        <div class="service-row"><span><span class="name">Peeling kawitacyjny</span><span class="desc">głębokie oczyszczanie ultradźwiękami</span></span><span class="dots"></span><span class="price">140 zł</span></div>
+      </div>
+    </div>
+
+    <div class="service-panel" id="panel-brows" role="tabpanel" aria-labelledby="tab-brows" hidden>
+      <div class="service-grid">
+        <div class="service-row"><span><span class="name">Henna brwi i rzęs</span><span class="desc">z regulacją brwi</span></span><span class="dots"></span><span class="price">60 zł</span></div>
+        <div class="service-row"><span><span class="name">Laminacja brwi</span><span class="desc">utrwalenie kształtu na ok. 6 tyg.</span></span><span class="dots"></span><span class="price">90 zł</span></div>
+        <div class="service-row"><span><span class="name">Laminacja rzęs</span><span class="desc">z odżywką, efekt lifting</span></span><span class="dots"></span><span class="price">120 zł</span></div>
+        <div class="service-row"><span><span class="name">Przedłużanie rzęs 1:1</span><span class="desc">metoda klasyczna</span></span><span class="dots"></span><span class="price">180 zł</span></div>
+        <div class="service-row"><span><span class="name">Przedłużanie rzęs objętościowe</span><span class="desc">efekt mega volume</span></span><span class="dots"></span><span class="price">220 zł</span></div>
+        <div class="service-row"><span><span class="name">Makijaż permanentny brwi</span><span class="desc">metoda pudrowa</span></span><span class="dots"></span><span class="price">od 500 zł</span></div>
+      </div>
+    </div>
+
+    <p class="service-note">Ceny mają charakter przykładowy i mogą się różnić w zależności od stanu paznokcia / skóry oraz długości zabiegu.</p>
+  </div>
+</section>
+
+<!-- ============ GALERIA ============ -->
+<section class="gallery" id="galeria">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nasze prace</span>
+      <h2>Galeria salonu</h2>
+      <p>Kilka kadrów z naszego salonu i wykonanych stylizacji.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal">
+        <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylizacja paznokci french manicure">
+          <rect width="300" height="400" fill="#e6ab9f"/>
+          <g fill="#fdf3f2"><rect x="60" y="120" width="40" height="90" rx="18"/><rect x="110" y="90" width="40" height="120" rx="18"/><rect x="160" y="100" width="40" height="110" rx="18"/><rect x="210" y="130" width="40" height="80" rx="18"/></g>
+          <g fill="#c9a24b"><rect x="60" y="190" width="40" height="16" rx="8"/><rect x="110" y="195" width="40" height="16" rx="8"/><rect x="160" y="195" width="40" height="16" rx="8"/><rect x="210" y="188" width="40" height="16" rx="8"/></g>
+        </svg>
+        <span class="cap">French manicure</span>
+      </div>
+      <div class="gallery-item reveal reveal-delay-1">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wnętrze salonu kosmetycznego">
+          <rect width="300" height="400" fill="#9e5140"/>
+          <circle cx="150" cy="150" r="80" fill="#c06a52"/>
+          <rect x="70" y="260" width="160" height="14" rx="7" fill="#f2cdc6" opacity="0.7"/>
+          <rect x="90" y="290" width="120" height="14" rx="7" fill="#f2cdc6" opacity="0.5"/>
+        </svg>
+        <span class="cap">Wnętrze salonu</span>
+      </div>
+      <div class="gallery-item reveal reveal-delay-2">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Makijaż wieczorowy">
+          <rect width="300" height="400" fill="#d68873"/>
+          <ellipse cx="150" cy="180" rx="70" ry="90" fill="#f9e4e1"/>
+          <path d="M100 150 Q150 120 200 150" stroke="#332420" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M115 220 Q150 240 185 220" stroke="#9e5140" stroke-width="6" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="cap">Makijaż wieczorowy</span>
+      </div>
+      <div class="gallery-item reveal reveal-delay-3">
+        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laminacja brwi i rzęs">
+          <rect width="300" height="400" fill="#b3872f"/>
+          <path d="M70 180 Q150 130 230 180" stroke="#3f2620" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <path d="M90 230 Q150 260 210 230" stroke="#3f2620" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+        </svg>
+        <span class="cap">Laminacja brwi</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPINIE ============ -->
+<section class="reviews" id="opinie">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Opinie klientek</span>
+      <h2>Co mówią o nas klientki</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="reviews-track">
+      <article class="review-card reveal">
+        <div class="stars" aria-label="Ocena: 5 na 5">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+        </div>
+        <p class="quote">„Chodzę do Nikoli od dwóch lat i nigdy się nie zawiodłam. Hybryda trzyma się idealnie, a atmosfera w salonie jest naprawdę kojąca.”</p>
+        <div class="review-who">
+          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#d68873"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#d68873"/></svg>
+          <span><strong>Aleksandra M.</strong><span>Manicure hybrydowy</span></span>
+        </div>
+      </article>
+      <article class="review-card reveal reveal-delay-1">
+        <div class="stars" aria-label="Ocena: 5 na 5">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+        </div>
+        <p class="quote">„Makijaż ślubny przeszedł moje oczekiwania — trzymał się cały dzień, a próba pomogła rozwiać wszystkie wątpliwości. Polecam każdej Pannie Młodej!”</p>
+        <div class="review-who">
+          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#c06a52"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#c06a52"/></svg>
+          <span><strong>Karolina W.</strong><span>Makijaż ślubny</span></span>
+        </div>
+      </article>
+      <article class="review-card reveal reveal-delay-2">
+        <div class="stars" aria-label="Ocena: 5 na 5">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.6 6.2.6-4.6 4.2 1.3 6.1L10 14.9 4.5 17.5l1.3-6.1L1.2 7.2l6.2-.6z"/></svg>
+        </div>
+        <p class="quote">„Laminacja brwi zmieniła moje poranki — nie muszę już ich codziennie stylizować. Ekipa bardzo miła i profesjonalna, polecam z całego serca.”</p>
+        <div class="review-who">
+          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#e6ab9f"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#e6ab9f"/></svg>
+          <span><strong>Patrycja N.</strong><span>Laminacja brwi</span></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="reveal">Zarezerwuj swój moment piękna</h2>
+    <p class="reveal reveal-delay-1">Wolne terminy szybko się zapełniają — zadzwoń, napisz lub wypełnij formularz, a oddzwonimy w ciągu jednego dnia roboczego.</p>
+    <a href="#kontakt" class="btn btn-primary reveal reveal-delay-2">Przejdź do kontaktu</a>
+  </div>
+</section>
+
+<!-- ============ KONTAKT ============ -->
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Umów się na wizytę</h2>
+      <p>Znajdziesz nas w centrum Krakowa — zapraszamy od poniedziałku do soboty.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="info-card">
+          <h3>Dane kontaktowe</h3>
+          <ul class="info-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s-7-6.3-7-11a7 7 0 1114 0c0 4.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span><strong>Adres</strong>ul. Kwiatowa 14/2, 30-001 Kraków</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.1-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .3 2 .7 2.9a2 2 0 01-.4 2.1L8 10.1a16 16 0 006 6l1.4-1.4a2 2 0 012.1-.4c.9.4 1.9.6 2.9.7a2 2 0 011.7 2z"/></svg>
+              <span><strong>Telefon</strong><a href="tel:+48512345678">512 345 678</a></span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+              <span><strong>E-mail</strong><a href="mailto:kontakt@salonnikola.pl">kontakt@salonnikola.pl</a></span>
+            </li>
+          </ul>
+
+          <h3 style="font-size:1.15rem;margin-bottom:14px;">Godziny otwarcia</h3>
+          <table class="hours-table" id="hoursTable">
+            <tr data-day="1"><td>Poniedziałek</td><td>9:00 – 19:00</td></tr>
+            <tr data-day="2"><td>Wtorek</td><td>9:00 – 19:00</td></tr>
+            <tr data-day="3"><td>Środa</td><td>9:00 – 19:00</td></tr>
+            <tr data-day="4"><td>Czwartek</td><td>9:00 – 20:00</td></tr>
+            <tr data-day="5"><td>Piątek</td><td>9:00 – 20:00</td></tr>
+            <tr data-day="6"><td>Sobota</td><td>9:00 – 15:00</td></tr>
+            <tr data-day="0"><td>Niedziela</td><td>nieczynne</td></tr>
+          </table>
+
+          <div class="social-row">
+            <a href="#" aria-label="Instagram salonu Nikola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="#" aria-label="Facebook salonu Nikola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <div class="map-card">
+          <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa poglądowa okolicy salonu">
+            <rect width="600" height="400" fill="#f2cdc6"/>
+            <g stroke="#e6ab9f" stroke-width="10" opacity="0.6">
+              <line x1="0" y1="90" x2="600" y2="90"/>
+              <line x1="0" y1="230" x2="600" y2="250"/>
+              <line x1="120" y1="0" x2="150" y2="400"/>
+              <line x1="420" y1="0" x2="460" y2="400"/>
+            </g>
+            <g fill="#d68873" opacity="0.5">
+              <rect x="60" y="120" width="50" height="60"/>
+              <rect x="180" y="270" width="70" height="50"/>
+              <rect x="380" y="120" width="60" height="70"/>
+              <rect x="470" y="260" width="55" height="55"/>
+            </g>
+          </svg>
+          <div class="map-pin">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+          </div>
+          <div class="map-label"><strong>Salon Nikola</strong>ul. Kwiatowa 14/2, Kraków</div>
+        </div>
+
+        <form class="booking-form" id="bookingForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="fName">Imię i nazwisko</label>
+              <input type="text" id="fName" name="name" required autocomplete="name" placeholder="Jan / Anna Kowalska">
+            </div>
+            <div class="field">
+              <label for="fPhone">Telefon</label>
+              <input type="tel" id="fPhone" name="phone" required autocomplete="tel" placeholder="500 000 000">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fService">Interesująca usługa</label>
+              <select id="fService" name="service">
+                <option>Manicure</option>
+                <option>Pedicure</option>
+                <option>Makijaż</option>
+                <option>Zabieg na twarz</option>
+                <option>Brwi / rzęsy</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fDate">Preferowany termin</label>
+              <input type="date" id="fDate" name="date">
+            </div>
+          </div>
+          <div class="field">
+            <label for="fMsg">Wiadomość (opcjonalnie)</label>
+            <textarea id="fMsg" name="message" rows="3" placeholder="Np. dogodne godziny popołudniowe"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center;">Wyślij zapytanie</button>
+          <div class="form-msg success" id="formMsg" role="status" aria-live="polite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5L20 7"/></svg>
+            <span>Dziękujemy! To formularz demonstracyjny — w wersji produkcyjnej zapytanie trafi bezpośrednio do recepcji salonu.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="19" stroke="#c9a24b" stroke-width="1"/>
+            <path d="M13 26 C13 18, 18 13, 20 10 C22 13, 27 18, 27 26" stroke="#f2cdc6" stroke-width="1.4" fill="none"/>
+          </svg>
+          <span><strong>Nikola</strong><small>Salon Kosmetyczny</small></span>
+        </a>
+        <p>Kameralny salon kosmetyczny w centrum Krakowa. Manicure, pedicure, makijaż i pielęgnacja twarzy w spokojnej, eleganckiej atmosferze.</p>
+      </div>
+      <div>
+        <h4>Nawigacja</h4>
+        <ul>
+          <li><a href="#o-nas">O nas</a></li>
+          <li><a href="#uslugi">Usługi</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#opinie">Opinie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Usługi</h4>
+        <ul>
+          <li><a href="#uslugi">Manicure &amp; Pedicure</a></li>
+          <li><a href="#uslugi">Makijaż</a></li>
+          <li><a href="#uslugi">Zabiegi na twarz</a></li>
+          <li><a href="#uslugi">Brwi i rzęsy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li>ul. Kwiatowa 14/2, Kraków</li>
+          <li><a href="tel:+48512345678">512 345 678</a></li>
+          <li><a href="mailto:kontakt@salonnikola.pl">kontakt@salonnikola.pl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Salon Kosmetyczny Nikola. Wszelkie prawa zastrzeżone.</span>
+      <span>Strona demonstracyjna — dane przykładowe.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Wróć na górę strony">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* header scroll state */
+const header = document.getElementById('siteHeader');
+const toTop = document.getElementById('toTop');
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 12);
+  toTop.classList.toggle('show', y > 600);
+}
+document.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+/* mobile menu */
+const burger = document.getElementById('burgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMenu(){
+  mobileMenu.classList.remove('open');
+  burger.setAttribute('aria-expanded','false');
+}
+burger.addEventListener('click', ()=>{
+  const open = mobileMenu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
+
+/* scroll reveal */
+const revealEls = document.querySelectorAll('.reveal:not(.in)');
+if('IntersectionObserver' in window){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+  revealEls.forEach(el=>io.observe(el));
+} else {
+  revealEls.forEach(el=>el.classList.add('in'));
+}
+
+/* services tabs */
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = {
+  'tab-manicure':'panel-manicure',
+  'tab-pedicure':'panel-pedicure',
+  'tab-makeup':'panel-makeup',
+  'tab-face':'panel-face',
+  'tab-brows':'panel-brows'
+};
+tabs.forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    tabs.forEach(t=>t.setAttribute('aria-selected','false'));
+    tab.setAttribute('aria-selected','true');
+    Object.values(panels).forEach(id=>{
+      const p = document.getElementById(id);
+      p.classList.remove('active');
+      p.hidden = true;
+    });
+    const targetId = panels[tab.id];
+    const target = document.getElementById(targetId);
+    target.hidden = false;
+    requestAnimationFrame(()=>target.classList.add('active'));
+  });
+});
+
+/* highlight today in hours table */
+const todayIdx = new Date().getDay();
+const todayRow = document.querySelector('#hoursTable tr[data-day="'+todayIdx+'"]');
+if(todayRow){
+  todayRow.querySelectorAll('td').forEach(td=>td.classList.add('hours-today'));
+}
+
+/* booking form (demo only, no backend) */
+const form = document.getElementById('bookingForm');
+const formMsg = document.getElementById('formMsg');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  if(!form.checkValidity()){
+    form.reportValidity();
+    return;
+  }
+  formMsg.classList.add('show');
+  form.reset();
+  formMsg.scrollIntoView({behavior:'smooth', block:'nearest'});
+});
+</script>
+
+</body>
+</html>
