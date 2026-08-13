@@ -159,29 +159,6 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 }
 @media (min-width:900px){ .hero{padding:190px 0 120px;} }
 
-/* ============ SPARKLE PARTICLES (hero) ============ */
-.sparkle-layer{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
-}
-.sparkle-layer .spark{
-  position:absolute;border-radius:50%;
-  background:radial-gradient(circle, #fff 0%, var(--gold-400) 35%, transparent 72%);
-  box-shadow:0 0 6px 1px rgba(201,162,75,0.55);
-  opacity:0;
-  animation: sparkle-drift linear infinite, sparkle-twinkle ease-in-out infinite;
-  will-change:transform, opacity;
-}
-@keyframes sparkle-drift{
-  from{ transform: translate3d(var(--sx,0), 0, 0); }
-  to{ transform: translate3d(calc(var(--sx,0) + var(--dx,20px)), -140px, 0); }
-}
-@keyframes sparkle-twinkle{
-  0%, 100%{ opacity:0; }
-  25%{ opacity:var(--peak,0.8); }
-  75%{ opacity:var(--peak,0.8); }
-}
-.hero-grid, .hero-art{ position:relative; z-index:1; }
-
 .hero-grid{
   display:grid;gap:56px;align-items:center;
 }
@@ -227,29 +204,9 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.in{opacity:1;transform:none;transition:none;}
   html{scroll-behavior:auto;}
-  .sparkle-layer, .petal-layer{display:none !important;}
 }
 
 section{padding:88px 0;}
-
-/* ============ PETALS (about section) ============ */
-.about{position:relative;}
-.petal-layer{
-  position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;
-}
-.petal-layer > div{
-  position:absolute;top:-40px;opacity:0;
-  animation: petal-fall linear infinite, petal-fade ease-in-out infinite;
-  will-change:transform, opacity;
-}
-@keyframes petal-fall{
-  from{ transform: translate3d(0,0,0) rotate(0deg); }
-  to{ transform: translate3d(var(--px,40px), 560px, 0) rotate(var(--pr,340deg)); }
-}
-@keyframes petal-fade{
-  0%{opacity:0;} 12%{opacity:0.75;} 85%{opacity:0.65;} 100%{opacity:0;}
-}
-.about-grid{position:relative;z-index:1;}
 
 .section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
 .section-head .eyebrow{display:block;margin-bottom:14px;}
@@ -487,7 +444,6 @@ footer ul a:hover{color:var(--gold-400);}
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
-  <div class="sparkle-layer" id="sparkleLayer" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow reveal in">Manicure · Pedicure · Makijaż · Pielęgnacja twarzy</span>
@@ -517,7 +473,6 @@ footer ul a:hover{color:var(--gold-400);}
 
 <!-- ============ O NAS ============ -->
 <section class="about" id="o-nas">
-  <div class="petal-layer" id="petalLayer" aria-hidden="true"></div>
   <div class="wrap about-grid">
     <div class="about-art reveal">
       <img src="images/about-salon.jpg" alt="Wnętrze salonu kosmetycznego Nikola" loading="lazy">
@@ -906,66 +861,6 @@ if('IntersectionObserver' in window){
   revealEls.forEach(el=>io.observe(el));
 } else {
   revealEls.forEach(el=>el.classList.add('in'));
-}
-
-/* particle effects — skipped entirely for prefers-reduced-motion */
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if(!reduceMotion){
-
-  /* 1) hero gold sparkles, with subtle mouse parallax */
-  const sparkleLayer = document.getElementById('sparkleLayer');
-  if(sparkleLayer){
-    const SPARK_COUNT = 24;
-    for(let i=0;i<SPARK_COUNT;i++){
-      const s = document.createElement('span');
-      s.className = 'spark';
-      const size = 5 + Math.random()*6;
-      s.style.width = size+'px';
-      s.style.height = size+'px';
-      s.style.left = (Math.random()*100)+'%';
-      s.style.top = (8 + Math.random()*80)+'%';
-      s.style.setProperty('--dx', (Math.random()*40-20)+'px');
-      s.style.setProperty('--peak', (0.55 + Math.random()*0.35).toFixed(2));
-      s.style.animationDuration = (7 + Math.random()*8)+'s, ' + (3.5 + Math.random()*3)+'s';
-      s.style.animationDelay = (-Math.random()*10)+'s, ' + (-Math.random()*6)+'s';
-      sparkleLayer.appendChild(s);
-    }
-    const heroEl = document.querySelector('.hero');
-    if(heroEl && window.matchMedia('(hover:hover)').matches){
-      heroEl.addEventListener('mousemove', (e)=>{
-        const r = heroEl.getBoundingClientRect();
-        const px = (e.clientX - r.left)/r.width - 0.5;
-        const py = (e.clientY - r.top)/r.height - 0.5;
-        sparkleLayer.style.transform = `translate3d(${px*-12}px, ${py*-8}px, 0)`;
-      });
-      heroEl.addEventListener('mouseleave', ()=>{ sparkleLayer.style.transform = ''; });
-    }
-  }
-
-  /* 2) falling petals in "O nas" — spawned immediately, negative delays stagger
-        them so they're already mid-fall by the time the section is scrolled to */
-  const petalLayer = document.getElementById('petalLayer');
-  const petalSVG = (hue)=>`<svg viewBox="0 0 40 40" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 4 C28 4 34 12 34 20 C34 28 28 36 20 36 C12 36 6 28 6 20 C6 12 12 4 20 4Z" fill="${hue}"/>
-  </svg>`;
-  if(petalLayer){
-    const petalColors = ['var(--rose-400)','var(--rose-300)','var(--gold-500)'];
-    const PETAL_COUNT = 8;
-    for(let i=0;i<PETAL_COUNT;i++){
-      const p = document.createElement('div');
-      const size = 18 + Math.random()*16;
-      p.style.width = size+'px';
-      p.style.height = size+'px';
-      p.style.left = (Math.random()*100)+'%';
-      p.style.setProperty('--px', (Math.random()*80-40)+'px');
-      p.style.setProperty('--pr', (240+Math.random()*240)+'deg');
-      p.style.animationDuration = (9 + Math.random()*7)+'s, ' + (9 + Math.random()*7)+'s';
-      p.style.animationDelay = (-Math.random()*14)+'s, ' + (-Math.random()*14)+'s';
-      p.innerHTML = petalSVG(petalColors[i % petalColors.length]);
-      petalLayer.appendChild(p);
-    }
-  }
 }
 
 /* services tabs */
