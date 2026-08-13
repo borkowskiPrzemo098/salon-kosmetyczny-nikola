@@ -181,7 +181,8 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 .hero-stats div span{font-size:0.74rem;letter-spacing:0.06em;color:var(--ink-soft);text-transform:uppercase;}
 
 .hero-art{position:relative;}
-.hero-art svg{width:100%;height:auto;}
+.hero-art .photo-frame{border-radius:4px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(var(--shadow-color)/0.5);}
+.hero-art img{width:100%;height:100%;aspect-ratio:480/520;object-fit:cover;display:block;}
 .hero-badge{
   position:absolute;bottom:-22px;left:-10px;background:var(--paper);
   border:1px solid var(--line);padding:16px 20px;border-radius:2px;
@@ -218,7 +219,8 @@ section{padding:88px 0;}
 .about{background:var(--beige-50);}
 .about-grid{display:grid;gap:48px;align-items:center;}
 @media (min-width:940px){ .about-grid{grid-template-columns:0.9fr 1.1fr;gap:64px;} }
-.about-art svg{width:100%;height:auto;}
+.about-art{border-radius:4px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(var(--shadow-color)/0.5);}
+.about-art img{width:100%;height:100%;aspect-ratio:420/460;object-fit:cover;display:block;}
 .about-copy p{margin-bottom:18px;font-size:1.04rem;}
 .about-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:16px;}
 .about-list li{display:flex;gap:14px;align-items:flex-start;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.94rem;color:var(--ink);}
@@ -268,8 +270,8 @@ section{padding:88px 0;}
   position:relative;aspect-ratio:3/4;border-radius:2px;overflow:hidden;
   background:var(--rose-600);
 }
-.gallery-item svg{width:100%;height:100%;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
-.gallery-item:hover svg{transform:scale(1.06);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
+.gallery-item:hover img{transform:scale(1.06);}
 .gallery-item .cap{
   position:absolute;left:0;right:0;bottom:0;padding:16px;
   background:linear-gradient(0deg,rgba(20,10,8,0.68),transparent);
@@ -289,7 +291,7 @@ section{padding:88px 0;}
 .stars svg{width:16px;height:16px;}
 .review-card p.quote{font-style:italic;color:var(--ink);font-size:1rem;}
 .review-who{display:flex;align-items:center;gap:12px;margin-top:auto;}
-.review-avatar{width:42px;height:42px;border-radius:50%;flex:none;}
+.review-avatar{width:42px;height:42px;border-radius:50%;flex:none;object-fit:cover;}
 .review-who strong{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.88rem;color:var(--rose-900);}
 .review-who span{font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.74rem;color:var(--ink-soft);}
 
@@ -457,52 +459,9 @@ footer ul a:hover{color:var(--gold-400);}
       </div>
     </div>
     <div class="hero-art reveal in reveal-delay-2">
-      <svg viewBox="0 0 480 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja: kosmetyczka pielęgnująca dłoń klientki">
-        <defs>
-          <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#f9e4e1"/>
-            <stop offset="1" stop-color="#f4ede1"/>
-          </linearGradient>
-          <linearGradient id="skinG" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#e6ab9f"/>
-            <stop offset="1" stop-color="#d68873"/>
-          </linearGradient>
-        </defs>
-        <rect x="0" y="0" width="480" height="520" rx="6" fill="url(#heroBg)"/>
-        <circle cx="380" cy="90" r="70" fill="#f2cdc6" opacity="0.6"/>
-        <circle cx="60" cy="460" r="90" fill="#c9a24b" opacity="0.15"/>
-        <!-- table -->
-        <rect x="40" y="360" width="400" height="14" rx="4" fill="#e9dcd2"/>
-        <!-- forearm -->
-        <path d="M120 360 C120 300 150 260 210 250 L 340 250 C 360 250 370 265 365 285 L 250 320 C 220 328 190 345 175 360 Z" fill="url(#skinG)"/>
-        <!-- hand receiving manicure -->
-        <ellipse cx="330" cy="290" rx="46" ry="30" fill="url(#skinG)"/>
-        <g fill="#f7ece7">
-          <rect x="356" y="272" width="34" height="12" rx="6"/>
-          <rect x="360" y="286" width="36" height="12" rx="6"/>
-          <rect x="358" y="300" width="32" height="12" rx="6"/>
-        </g>
-        <g fill="#9e5140" opacity="0.85">
-          <rect x="382" y="272" width="10" height="12" rx="4"/>
-          <rect x="388" y="286" width="10" height="12" rx="4"/>
-          <rect x="382" y="300" width="10" height="12" rx="4"/>
-        </g>
-        <!-- cosmetologist hand with brush -->
-        <path d="M300 230 C320 220 345 222 358 238 C368 250 362 262 348 262 C 336 262 322 250 308 246 Z" fill="url(#skinG)"/>
-        <rect x="352" y="234" width="70" height="8" rx="4" fill="#b3872f" transform="rotate(18 352 234)"/>
-        <!-- decorative florals -->
-        <g stroke="#9e5140" stroke-width="1.3" fill="none" opacity="0.55">
-          <path d="M60 120 C40 100 40 70 60 55 C80 70 80 100 60 120Z"/>
-          <path d="M60 120 C80 100 110 100 125 118 C110 135 80 135 60 120Z"/>
-          <path d="M60 120 C40 138 40 168 60 183 C80 168 80 138 60 120Z"/>
-          <path d="M60 120 C40 100 10 100 -5 118" opacity="0"/>
-        </g>
-        <circle cx="60" cy="120" r="6" fill="#b3872f"/>
-        <g stroke="#c06a52" stroke-width="1" fill="none" opacity="0.4">
-          <path d="M420 420 C430 400 430 380 415 365"/>
-          <path d="M430 440 C445 425 450 405 440 385"/>
-        </g>
-      </svg>
+      <div class="photo-frame">
+        <img src="images/hero-manicure.jpg" alt="Kosmetyczka wykonująca manicure dłoni klientki w salonie Nikola" loading="eager">
+      </div>
       <div class="hero-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.4 5.5L20 9l-4.4 3.8L16.9 19 12 15.8 7.1 19l1.3-6.2L4 9l5.6-.5L12 3z"/></svg>
         <span><strong>Salon Roku 2025</strong><span>wyróżnienie regionalne w kategorii uroda</span></span>
@@ -515,18 +474,7 @@ footer ul a:hover{color:var(--gold-400);}
 <section class="about" id="o-nas">
   <div class="wrap about-grid">
     <div class="about-art reveal">
-      <svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustracja wnętrza salonu kosmetycznego">
-        <rect x="0" y="0" width="420" height="460" rx="6" fill="#f4ede1"/>
-        <rect x="30" y="60" width="360" height="340" rx="4" fill="#fffdfb" stroke="#e9dcd2"/>
-        <circle cx="210" cy="150" r="58" fill="#f2cdc6"/>
-        <path d="M210 108 C230 108 246 124 246 144 C246 172 226 192 210 205 C194 192 174 172 174 144 C174 124 190 108 210 108Z" fill="#e6ab9f" opacity="0.7"/>
-        <rect x="90" y="250" width="240" height="10" rx="5" fill="#e9dcd2"/>
-        <rect x="90" y="280" width="180" height="10" rx="5" fill="#e9dcd2"/>
-        <rect x="90" y="310" width="210" height="10" rx="5" fill="#e9dcd2"/>
-        <circle cx="335" cy="345" r="28" fill="#c9a24b" opacity="0.25"/>
-        <circle cx="60" cy="345" r="18" fill="#c06a52" opacity="0.2"/>
-        <rect x="0" y="420" width="420" height="40" fill="#e9dcd2" opacity="0.5"/>
-      </svg>
+      <img src="images/about-salon.jpg" alt="Wnętrze salonu kosmetycznego Nikola" loading="lazy">
     </div>
     <div class="about-copy reveal reveal-delay-1">
       <span class="eyebrow">Poznaj nas</span>
@@ -625,37 +573,19 @@ footer ul a:hover{color:var(--gold-400);}
     </div>
     <div class="gallery-grid">
       <div class="gallery-item reveal">
-        <svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylizacja paznokci french manicure">
-          <rect width="300" height="400" fill="#e6ab9f"/>
-          <g fill="#fdf3f2"><rect x="60" y="120" width="40" height="90" rx="18"/><rect x="110" y="90" width="40" height="120" rx="18"/><rect x="160" y="100" width="40" height="110" rx="18"/><rect x="210" y="130" width="40" height="80" rx="18"/></g>
-          <g fill="#c9a24b"><rect x="60" y="190" width="40" height="16" rx="8"/><rect x="110" y="195" width="40" height="16" rx="8"/><rect x="160" y="195" width="40" height="16" rx="8"/><rect x="210" y="188" width="40" height="16" rx="8"/></g>
-        </svg>
+        <img src="images/gallery-nails.jpg" alt="Stylizacja paznokci — zbliżenie na manicure" loading="lazy">
         <span class="cap">French manicure</span>
       </div>
       <div class="gallery-item reveal reveal-delay-1">
-        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wnętrze salonu kosmetycznego">
-          <rect width="300" height="400" fill="#9e5140"/>
-          <circle cx="150" cy="150" r="80" fill="#c06a52"/>
-          <rect x="70" y="260" width="160" height="14" rx="7" fill="#f2cdc6" opacity="0.7"/>
-          <rect x="90" y="290" width="120" height="14" rx="7" fill="#f2cdc6" opacity="0.5"/>
-        </svg>
+        <img src="images/gallery-interior.jpg" alt="Wnętrze salonu kosmetycznego Nikola" loading="lazy">
         <span class="cap">Wnętrze salonu</span>
       </div>
       <div class="gallery-item reveal reveal-delay-2">
-        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Makijaż wieczorowy">
-          <rect width="300" height="400" fill="#d68873"/>
-          <ellipse cx="150" cy="180" rx="70" ry="90" fill="#f9e4e1"/>
-          <path d="M100 150 Q150 120 200 150" stroke="#332420" stroke-width="4" fill="none" stroke-linecap="round"/>
-          <path d="M115 220 Q150 240 185 220" stroke="#9e5140" stroke-width="6" fill="none" stroke-linecap="round"/>
-        </svg>
+        <img src="images/gallery-makeup.jpg" alt="Nakładanie makijażu wieczorowego" loading="lazy">
         <span class="cap">Makijaż wieczorowy</span>
       </div>
       <div class="gallery-item reveal reveal-delay-3">
-        <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laminacja brwi i rzęs">
-          <rect width="300" height="400" fill="#b3872f"/>
-          <path d="M70 180 Q150 130 230 180" stroke="#3f2620" stroke-width="10" fill="none" stroke-linecap="round"/>
-          <path d="M90 230 Q150 260 210 230" stroke="#3f2620" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
-        </svg>
+        <img src="images/gallery-brows.jpg" alt="Zabieg laminacji brwi" loading="lazy">
         <span class="cap">Laminacja brwi</span>
       </div>
     </div>
@@ -681,7 +611,7 @@ footer ul a:hover{color:var(--gold-400);}
         </div>
         <p class="quote">„Chodzę do Nikoli od dwóch lat i nigdy się nie zawiodłam. Hybryda trzyma się idealnie, a atmosfera w salonie jest naprawdę kojąca.”</p>
         <div class="review-who">
-          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#d68873"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#d68873"/></svg>
+          <img class="review-avatar" src="images/avatar-1.jpg" alt="" loading="lazy">
           <span><strong>Aleksandra M.</strong><span>Manicure hybrydowy</span></span>
         </div>
       </article>
@@ -695,7 +625,7 @@ footer ul a:hover{color:var(--gold-400);}
         </div>
         <p class="quote">„Makijaż ślubny przeszedł moje oczekiwania — trzymał się cały dzień, a próba pomogła rozwiać wszystkie wątpliwości. Polecam każdej Pannie Młodej!”</p>
         <div class="review-who">
-          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#c06a52"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#c06a52"/></svg>
+          <img class="review-avatar" src="images/avatar-2.jpg" alt="" loading="lazy">
           <span><strong>Karolina W.</strong><span>Makijaż ślubny</span></span>
         </div>
       </article>
@@ -709,7 +639,7 @@ footer ul a:hover{color:var(--gold-400);}
         </div>
         <p class="quote">„Laminacja brwi zmieniła moje poranki — nie muszę już ich codziennie stylizować. Ekipa bardzo miła i profesjonalna, polecam z całego serca.”</p>
         <div class="review-who">
-          <svg class="review-avatar" viewBox="0 0 42 42"><circle cx="21" cy="21" r="21" fill="#f2cdc6"/><circle cx="21" cy="17" r="8" fill="#e6ab9f"/><path d="M6 40 C6 28 34 28 34 40Z" fill="#e6ab9f"/></svg>
+          <img class="review-avatar" src="images/avatar-3.jpg" alt="" loading="lazy">
           <span><strong>Patrycja N.</strong><span>Laminacja brwi</span></span>
         </div>
       </article>
