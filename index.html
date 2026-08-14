@@ -212,6 +212,7 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.in{opacity:1;transform:none;transition:none;}
   html{scroll-behavior:auto;}
+  .lightbox, .lightbox-figure{transition:none;}
 }
 
 section{padding:88px 0;}
@@ -278,14 +279,29 @@ section{padding:88px 0;}
 .gallery-item{
   position:relative;aspect-ratio:3/4;border-radius:2px;overflow:hidden;
   background:var(--rose-600);
+  display:block;width:100%;padding:0;margin:0;border:none;font:inherit;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
 .gallery-item:hover img{transform:scale(1.06);}
+.gallery-item::after{
+  content:"";position:absolute;inset:0;background:rgba(20,10,8,0);transition:background .25s ease;
+}
+.gallery-item:hover::after{background:rgba(20,10,8,0.12);}
 .gallery-item .cap{
   position:absolute;left:0;right:0;bottom:0;padding:16px;
   background:linear-gradient(0deg,rgba(20,10,8,0.68),transparent);
   color:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.78rem;letter-spacing:0.04em;
+  text-align:left;
 }
+.gallery-item .zoom-hint{
+  position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;
+  background:rgba(20,10,8,0.45);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  opacity:0;transform:scale(0.85);transition:opacity .25s ease, transform .25s ease;
+}
+.gallery-item:hover .zoom-hint,.gallery-item:focus-visible .zoom-hint{opacity:1;transform:scale(1);}
+.gallery-item .zoom-hint svg{width:16px;height:16px;}
 
 /* ============ REVIEWS ============ */
 .reviews-track{
@@ -452,6 +468,54 @@ footer ul a:hover{color:var(--gold-400);}
   box-shadow:0 16px 26px -8px rgba(var(--shadow-color)/0.65), 0 0 0 5px var(--paper);
 }
 .tabbar-item-primary.active .tabbar-badge svg{color:#fff;transform:none;}
+
+/* ============ LIGHTBOX ============ */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  background:rgba(20,10,8,0.92);
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .3s ease, visibility 0s linear .3s;
+}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease, visibility 0s linear 0s;}
+.lightbox-figure{
+  margin:0;max-width:min(92vw,1100px);max-height:88vh;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  transform:scale(0.96);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+}
+.lightbox.open .lightbox-figure{transform:scale(1);}
+.lightbox-figure img{
+  max-width:100%;max-height:78vh;width:auto;height:auto;object-fit:contain;
+  border-radius:3px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.6);
+  display:block;
+}
+.lightbox-figure figcaption{
+  color:rgba(255,255,255,0.85);font-family:"Helvetica Neue",Arial,sans-serif;
+  font-size:0.86rem;letter-spacing:0.03em;text-align:center;
+}
+.lightbox-close{
+  position:absolute;top:20px;right:20px;width:46px;height:46px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease, transform .2s ease;
+}
+.lightbox-close:hover{background:rgba(255,255,255,0.22);transform:rotate(90deg);}
+.lightbox-close svg{width:20px;height:20px;}
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease, transform .2s ease;
+}
+.lightbox-nav:hover{background:rgba(255,255,255,0.22);}
+.lightbox-nav svg{width:22px;height:22px;}
+.lightbox-prev{left:16px;}
+.lightbox-next{right:16px;}
+@media (min-width:640px){ .lightbox-prev{left:28px;} .lightbox-next{right:28px;} }
+@media (max-width:520px){
+  .lightbox-nav{width:42px;height:42px;}
+  .lightbox-close{top:14px;right:14px;width:42px;height:42px;}
+}
 </style>
 </head>
 <body>
@@ -622,25 +686,45 @@ footer ul a:hover{color:var(--gold-400);}
       <div class="divider"></div>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal">
+      <button type="button" class="gallery-item reveal" data-lightbox-index="0">
         <img src="images/gallery-nails.jpg" alt="Stylizacja paznokci — zbliżenie na manicure" loading="lazy">
+        <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
         <span class="cap">French manicure</span>
-      </div>
-      <div class="gallery-item reveal reveal-delay-1">
+      </button>
+      <button type="button" class="gallery-item reveal reveal-delay-1" data-lightbox-index="1">
         <img src="images/gallery-interior.jpg" alt="Wnętrze salonu kosmetycznego Nikola" loading="lazy">
+        <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
         <span class="cap">Wnętrze salonu</span>
-      </div>
-      <div class="gallery-item reveal reveal-delay-2">
+      </button>
+      <button type="button" class="gallery-item reveal reveal-delay-2" data-lightbox-index="2">
         <img src="images/gallery-makeup.jpg" alt="Nakładanie makijażu wieczorowego" loading="lazy">
+        <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
         <span class="cap">Makijaż wieczorowy</span>
-      </div>
-      <div class="gallery-item reveal reveal-delay-3">
+      </button>
+      <button type="button" class="gallery-item reveal reveal-delay-3" data-lightbox-index="3">
         <img src="images/gallery-brows.jpg" alt="Zabieg laminacji brwi" loading="lazy">
+        <span class="zoom-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke-linecap="round"/></svg></span>
         <span class="cap">Laminacja brwi</span>
-      </div>
+      </button>
     </div>
   </div>
 </section>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd zdjęcia">
+  <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij podgląd">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+  </button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Poprzednie zdjęcie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Następne zdjęcie">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <figure class="lightbox-figure">
+    <img id="lightboxImg" src="" alt="">
+    <figcaption id="lightboxCap"></figcaption>
+  </figure>
+</div>
 
 <!-- ============ OPINIE ============ -->
 <section class="reviews" id="opinie">
@@ -966,6 +1050,62 @@ if('IntersectionObserver' in window){
   revealEls.forEach(el=>io.observe(el));
 } else {
   revealEls.forEach(el=>el.classList.add('in'));
+}
+
+/* gallery lightbox */
+const galleryItems = [...document.querySelectorAll('.gallery-item')];
+if (galleryItems.length) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCap = document.getElementById('lightboxCap');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  const slides = galleryItems.map(item => ({
+    src: item.querySelector('img').src,
+    alt: item.querySelector('img').alt,
+    cap: item.querySelector('.cap').textContent
+  }));
+  let currentIndex = 0;
+  let lastFocused = null;
+
+  function renderSlide(){
+    const s = slides[currentIndex];
+    lightboxImg.src = s.src;
+    lightboxImg.alt = s.alt;
+    lightboxCap.textContent = s.cap;
+  }
+  function openLightbox(index){
+    currentIndex = index;
+    lastFocused = document.activeElement;
+    renderSlide();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lightboxClose.focus();
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+  function showPrev(){ currentIndex = (currentIndex - 1 + slides.length) % slides.length; renderSlide(); }
+  function showNext(){ currentIndex = (currentIndex + 1) % slides.length; renderSlide(); }
+
+  galleryItems.forEach((item, i) => {
+    item.addEventListener('click', () => openLightbox(i));
+  });
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxPrev.addEventListener('click', showPrev);
+  lightboxNext.addEventListener('click', showNext);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
 }
 
 /* services tabs */
