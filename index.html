@@ -409,7 +409,7 @@ footer ul a:hover{color:var(--gold-400);}
 /* ============ MOBILE APP TAB BAR ============ */
 :root{ --tabbar-h:64px; }
 @media (max-width:899px){
-  body{ padding-bottom:calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+  body{ padding-bottom:calc(var(--tabbar-h) + 18px + env(safe-area-inset-bottom, 0px)); }
   .to-top{ bottom:calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px) + 16px); }
 }
 .tabbar{
@@ -433,6 +433,24 @@ footer ul a:hover{color:var(--gold-400);}
 .tabbar-item svg{width:21px;height:21px;stroke:currentColor;transition:transform .2s ease;}
 .tabbar-item.active{color:var(--rose-900);}
 .tabbar-item.active svg{color:var(--gold-600);transform:translateY(-1px);}
+
+.tabbar-item-primary{position:relative;justify-content:flex-end;padding-bottom:9px;}
+.tabbar-badge{
+  position:absolute;top:-20px;left:50%;transform:translateX(-50%);
+  width:54px;height:54px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg, var(--gold-400), var(--rose-600));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 22px -8px rgba(var(--shadow-color)/0.6), 0 0 0 5px var(--paper);
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+}
+.tabbar-item-primary .tabbar-badge svg{width:24px;height:24px;color:#fff;}
+.tabbar-item-primary span:last-child{font-size:0.64rem;}
+.tabbar-item-primary:active .tabbar-badge{transform:translateX(-50%) scale(0.94);}
+.tabbar-item-primary.active .tabbar-badge{
+  transform:translateX(-50%) scale(1.06);
+  box-shadow:0 16px 26px -8px rgba(var(--shadow-color)/0.65), 0 0 0 5px var(--paper);
+}
+.tabbar-item-primary.active .tabbar-badge svg{color:#fff;transform:none;}
 </style>
 </head>
 <body>
@@ -861,8 +879,10 @@ footer ul a:hover{color:var(--gold-400);}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 8-9 9-8-8V4h8z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg>
     <span>Cennik</span>
   </a>
-  <a href="#rezerwacja" class="tabbar-item" data-section="kontakt">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke-linecap="round"/></svg>
+  <a href="#rezerwacja" class="tabbar-item tabbar-item-primary" data-section="kontakt">
+    <span class="tabbar-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke-linecap="round"/></svg>
+    </span>
     <span>Wizyty</span>
   </a>
   <a href="#galeria" class="tabbar-item" data-section="galeria">
