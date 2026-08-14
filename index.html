@@ -88,7 +88,7 @@ header.site.scrolled{
   border-bottom-color:var(--line);
   box-shadow:0 10px 30px -20px rgba(var(--shadow-color)/0.4);
 }
-:root{ --header-h:96px; }
+:root{ --header-h:80px; }
 @media (min-width:900px){ :root{ --header-h:136px; } }
 .nav{
   display:flex;align-items:center;justify-content:space-between;
@@ -99,7 +99,7 @@ header.site.scrolled{
   font-size:1.35rem;letter-spacing:0.04em;color:var(--rose-900);
 }
 .brand .mark{width:30px;height:30px;flex:none;}
-.brand .logo-img{height:76px;width:auto;display:block;}
+.brand .logo-img{height:68px;width:auto;display:block;}
 @media (min-width:900px){ .brand .logo-img{height:112px;} }
 .brand strong{font-weight:400;}
 .brand small{
@@ -172,8 +172,9 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (min-width:960px){ .hero-grid{grid-template-columns:1.05fr 0.95fr;gap:40px;} }
 
 .hero h1{
-  font-size:clamp(2.6rem,6.4vw,4.4rem);line-height:1.03;margin:18px 0 22px;
+  font-size:clamp(2.6rem,6.4vw,4.4rem);line-height:1.2;margin:18px 0 22px;
 }
+@media (min-width:960px){ .hero h1{line-height:1.03;} }
 .hero h1 em{font-style:italic;color:var(--gold-600);}
 .hero p.lead{font-size:1.12rem;max-width:46ch;margin-bottom:34px;}
 .hero-actions{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:44px;}
