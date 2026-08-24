@@ -249,8 +249,10 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 .hero-stats div strong{
   display:block;font-family:"Iowan Old Style",Georgia,serif;font-weight:400;
   font-size:clamp(2.8rem,6vw,3.6rem);line-height:1;color:var(--rose-900);margin-bottom:6px;
+  font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;
 }
 .hero-stats div span{font-size:0.74rem;letter-spacing:0.06em;color:var(--ink-soft);text-transform:uppercase;}
+.hero-stats .stat-num{font-size:inherit;letter-spacing:normal;color:inherit;text-transform:none;}
 
 .hero-art{position:relative;}
 .hero-art .photo-frame{border-radius:4px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(var(--shadow-color)/0.5);}
