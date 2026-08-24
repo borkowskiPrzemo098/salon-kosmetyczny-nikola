@@ -132,14 +132,17 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 .btn-primary:hover{background:var(--rose-600);border-color:var(--rose-600);transform:translateY(-2px);box-shadow:0 14px 28px -14px rgba(var(--shadow-color)/0.55);}
 .btn-ghost{background:transparent;color:var(--rose-900);}
 .btn-ghost:hover{background:var(--rose-900);color:#fff;transform:translateY(-2px);}
+.btn:active{transform:scale(0.97);transition-duration:.1s;}
 
 .burger{
   display:flex;align-items:center;justify-content:center;flex:none;
   width:44px;height:44px;background:var(--paper);color:var(--rose-900);
   border:1px solid var(--line);border-radius:2px;
+  transition:transform .1s ease, background .2s ease;
 }
 @media (min-width:900px){ .burger{display:none;} }
 .burger svg{width:20px;height:20px;flex:none;display:block;color:inherit;}
+.burger:active{transform:scale(0.92);background:var(--beige-100);}
 
 .mobile-menu{
   position:fixed;inset:var(--header-h) 0 0 0;z-index:99;background:var(--beige-50);
@@ -205,10 +208,10 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 /* ============ REVEAL ============ */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
 .reveal.in{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:.08s;}
-.reveal-delay-2{transition-delay:.16s;}
-.reveal-delay-3{transition-delay:.24s;}
-.reveal-delay-4{transition-delay:.32s;}
+.reveal-delay-1{transition-delay:.04s;}
+.reveal-delay-2{transition-delay:.08s;}
+.reveal-delay-3{transition-delay:.12s;}
+.reveal-delay-4{transition-delay:.16s;}
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.in{opacity:1;transform:none;transition:none;}
   html{scroll-behavior:auto;}
@@ -247,6 +250,7 @@ section{padding:88px 0;}
   transition:background .25s ease,color .25s ease,border-color .25s ease;
 }
 .tab-btn:hover{border-color:var(--gold-400);color:var(--rose-900);}
+.tab-btn:active{transform:scale(0.96);transition-duration:.1s;}
 .tab-btn[aria-selected="true"]{background:var(--rose-900);border-color:var(--rose-900);color:#fff;}
 
 .service-panel{display:none;}
@@ -281,6 +285,7 @@ section{padding:88px 0;}
   background:var(--rose-600);
   display:block;width:100%;padding:0;margin:0;border:none;font:inherit;cursor:pointer;
   -webkit-tap-highlight-color:transparent;
+  transition:transform .15s ease;
 }
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1);}
 .gallery-item:hover img{transform:scale(1.06);}
@@ -288,6 +293,8 @@ section{padding:88px 0;}
   content:"";position:absolute;inset:0;background:rgba(20,10,8,0);transition:background .25s ease;
 }
 .gallery-item:hover::after{background:rgba(20,10,8,0.12);}
+.gallery-item:active{transform:scale(0.97);transition:transform .1s ease;}
+.gallery-item:active::after{background:rgba(20,10,8,0.2);}
 .gallery-item .cap{
   position:absolute;left:0;right:0;bottom:0;padding:16px;
   background:linear-gradient(0deg,rgba(20,10,8,0.68),transparent);
@@ -421,6 +428,7 @@ footer ul a:hover{color:var(--gold-400);}
 }
 .to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}
 .to-top:hover{background:var(--gold-500);}
+.to-top.show:active{transform:translateY(0) scale(0.9);transition-duration:.1s;}
 .to-top svg{width:18px;height:18px;}
 
 /* ============ MOBILE APP TAB BAR ============ */
@@ -450,6 +458,7 @@ footer ul a:hover{color:var(--gold-400);}
 .tabbar-item svg{width:21px;height:21px;stroke:currentColor;transition:transform .2s ease;}
 .tabbar-item.active{color:var(--rose-900);}
 .tabbar-item.active svg{color:var(--gold-600);transform:translateY(-1px);}
+.tabbar-item:active{opacity:0.55;transition:opacity .1s ease;}
 
 .tabbar-item-primary{position:relative;justify-content:flex-end;padding-bottom:9px;}
 .tabbar-badge{
@@ -475,15 +484,15 @@ footer ul a:hover{color:var(--gold-400);}
   display:flex;align-items:center;justify-content:center;padding:24px;
   background:rgba(20,10,8,0.92);
   opacity:0;visibility:hidden;pointer-events:none;
-  transition:opacity .3s ease, visibility 0s linear .3s;
+  transition:opacity .12s cubic-bezier(.4,0,1,1), visibility 0s linear .12s;
 }
-.lightbox.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .3s ease, visibility 0s linear 0s;}
+.lightbox.open{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .15s cubic-bezier(.22,1,.36,1), visibility 0s linear 0s;}
 .lightbox-figure{
   margin:0;max-width:min(92vw,1100px);max-height:88vh;
   display:flex;flex-direction:column;align-items:center;gap:14px;
-  transform:scale(0.96);transition:transform .3s cubic-bezier(.2,.8,.2,1);
+  transform:scale(0.96);transition:transform .12s cubic-bezier(.4,0,1,1);
 }
-.lightbox.open .lightbox-figure{transform:scale(1);}
+.lightbox.open .lightbox-figure{transform:scale(1);transition:transform .2s cubic-bezier(.22,1,.36,1);}
 .lightbox-figure img{
   max-width:100%;max-height:78vh;width:auto;height:auto;object-fit:contain;
   border-radius:3px;box-shadow:0 30px 70px -20px rgba(0,0,0,0.6);
@@ -500,6 +509,7 @@ footer ul a:hover{color:var(--gold-400);}
   transition:background .2s ease, transform .2s ease;
 }
 .lightbox-close:hover{background:rgba(255,255,255,0.22);transform:rotate(90deg);}
+.lightbox-close:active{background:rgba(255,255,255,0.3);transform:scale(0.88);transition-duration:.1s;}
 .lightbox-close svg{width:20px;height:20px;}
 .lightbox-nav{
   position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;
@@ -508,6 +518,7 @@ footer ul a:hover{color:var(--gold-400);}
   transition:background .2s ease, transform .2s ease;
 }
 .lightbox-nav:hover{background:rgba(255,255,255,0.22);}
+.lightbox-nav:active{background:rgba(255,255,255,0.3);transform:translateY(-50%) scale(0.88);transition-duration:.1s;}
 .lightbox-nav svg{width:22px;height:22px;}
 .lightbox-prev{left:16px;}
 .lightbox-next{right:16px;}
@@ -567,9 +578,9 @@ footer ul a:hover{color:var(--gold-400);}
         <a href="#uslugi" class="btn btn-ghost">Zobacz cennik</a>
       </div>
       <div class="hero-stats reveal in reveal-delay-4">
-        <div><strong>9&nbsp;lat</strong><span>Doświadczenia</span></div>
-        <div><strong>4200+</strong><span>Zadowolonych klientek</span></div>
-        <div><strong>4.9/5</strong><span>Średnia ocena</span></div>
+        <div><strong><span class="stat-num" data-target="9">0</span>&nbsp;lat</strong><span>Doświadczenia</span></div>
+        <div><strong><span class="stat-num" data-target="4200">0</span>+</strong><span>Zadowolonych klientek</span></div>
+        <div><strong><span class="stat-num" data-target="4.9" data-decimals="1">0</span>/5</strong><span>Średnia ocena</span></div>
       </div>
     </div>
     <div class="hero-art reveal in reveal-delay-2">
@@ -982,6 +993,31 @@ footer ul a:hover{color:var(--gold-400);}
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* animowany licznik statystyk w hero — wzorzec licznika z gsap-scroll,
+   zaimplementowany bez zależności (strona jest w 100% bez frameworków) */
+(function(){
+  const statEls = document.querySelectorAll('.stat-num');
+  if (!statEls.length) return;
+  const reduceMotionNow = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  statEls.forEach(el => {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0', 10);
+    if (reduceMotionNow || isNaN(target)) {
+      el.textContent = target.toFixed(decimals);
+      return;
+    }
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now){
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic, jak power1.out w GSAP
+      el.textContent = (target * eased).toFixed(decimals);
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+})();
 
 /* header scroll state */
 const header = document.getElementById('siteHeader');
