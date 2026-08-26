@@ -277,6 +277,10 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
      w rose-600 — dzięki wspólnemu punktowi zszycia nie ma widocznej granicy
      między zdjęciem a tłem. */
   .hero{
+    /* mniejszy padding-top niż baza (170px) — przesuwa cały blok tekstu
+       (eyebrow, nagłówek) wyżej, bliżej górnej, mniej "zatłoczonej twarzą"
+       części zdjęcia, więc eyebrow nie ląduje bezpośrednio na twarzy. */
+    padding-top:120px;
     background:linear-gradient(
       180deg,
       var(--rose-900) 0,
