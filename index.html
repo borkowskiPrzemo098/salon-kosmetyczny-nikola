@@ -300,12 +300,20 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
         var(--rose-900) 100%
       );
   }
-  /* Po rozjaśnieniu zdjęcia ciemniejszy gold-400 zlewał się z jaśniejszymi
-     partiami fotki — jaśniejszy odcień + delikatny cień dla czytelności
-     niezależnie od tego, co akurat jest pod spodem. */
-  .hero .eyebrow, .hero h1 em{
-    color:#f2d9a6;
-    text-shadow:0 1px 10px rgba(20,10,8,0.45);
+  /* Cień nie dawał wystarczającego kontrastu i wyglądał brudno — zamiast
+     tego: etykieta dostaje własne, stałe tło (plakietka), więc jej kontrast
+     nie zależy od jasności zdjęcia pod spodem; "zasługujesz" dostaje ten
+     sam biały co reszta nagłówka zamiast złota, które ginęło na jasnych
+     partiach fotki. */
+  .hero .eyebrow{
+    display:inline-block;
+    color:#f7e6bd;
+    background:rgba(30,17,14,0.62);
+    padding:7px 16px;
+    border-radius:999px;
+  }
+  .hero h1 em{
+    color:#fff;
   }
 }
 
