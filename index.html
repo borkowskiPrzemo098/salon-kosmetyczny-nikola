@@ -27,8 +27,8 @@
 <meta name="twitter:image" content="https://borkowskiprzemo098.github.io/salon-kosmetyczny-nikola/images/hero-manicure.jpg">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="images/favicon.png">
-<link rel="apple-touch-icon" href="images/favicon.png">
+<link rel="icon" type="image/png" href="images/faviconv2.png">
+<link rel="apple-touch-icon" href="images/faviconv2.png">
 
 <!--
   ====================================================================
@@ -272,9 +272,20 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
      kontener. Rozwiązanie: zdjęcie ograniczone do górnego pasa sekcji
      (mniej agresywny zoom, widać więcej kadru), reszta tekstu (przyciski,
      statystyki) ląduje już na jednolitym tle marki poniżej. */
-  .hero{background:linear-gradient(120deg,var(--rose-900),var(--rose-600));}
-  .hero-bg{inset:auto 0 auto 0;top:var(--header-h);height:min(58vh,460px);}
-  .hero-bg img{object-position:62% 0%;transform:scale(1.15);transform-origin:50% 0%;}
+  /* Tło sekcji: pełne rose-900 aż do dokładnego dołu pasa zdjęcia (ten sam
+     punkt, do którego dochodzi ::after poniżej), dopiero potem przechodzi
+     w rose-600 — dzięki wspólnemu punktowi zszycia nie ma widocznej granicy
+     między zdjęciem a tłem. */
+  .hero{
+    background:linear-gradient(
+      180deg,
+      var(--rose-900) 0,
+      var(--rose-900) calc(var(--header-h) - 10px + min(58vh,460px)),
+      var(--rose-600) 100%
+    );
+  }
+  .hero-bg{inset:auto 0 auto 0;top:calc(var(--header-h) - 10px);height:min(58vh,460px);}
+  .hero-bg img{object-position:62% 0%;}
   .hero-bg::after{
     background:linear-gradient(
       180deg,
@@ -517,6 +528,7 @@ footer.site{background:var(--rose-900);color:rgba(255,255,255,0.78);padding:64px
 .footer-grid{display:grid;gap:40px;margin-bottom:48px;}
 @media (min-width:820px){ .footer-grid{grid-template-columns:1.3fr 1fr 1fr 1fr;} }
 .footer-brand .brand{color:#fff;}
+.footer-logo-img{height:56px;width:auto;display:block;}
 .footer-brand p{color:rgba(255,255,255,0.68);margin-top:14px;max-width:32ch;}
 footer h4{color:#fff;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:18px;}
 footer ul{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:0.9rem;}
@@ -647,7 +659,7 @@ footer ul a:hover{color:var(--gold-400);}
 <header class="site" id="siteHeader">
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="Nikola — Salon Piękności — strona główna">
-      <img class="logo-img" src="images/logo-nikola-transparent.png" alt="Nikola — Salon Piękności">
+      <img class="logo-img" src="images/nikola-logo-hires-2x.png" alt="Nikola — Salon Piękności">
     </a>
     <nav class="links" aria-label="Nawigacja główna">
       <a href="#o-nas">O nas</a>
@@ -992,12 +1004,8 @@ footer ul a:hover{color:var(--gold-400);}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#top" class="brand">
-          <svg class="mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="20" cy="20" r="19" stroke="#c9a24b" stroke-width="1"/>
-            <path d="M13 26 C13 18, 18 13, 20 10 C22 13, 27 18, 27 26" stroke="#f2cdc6" stroke-width="1.4" fill="none"/>
-          </svg>
-          <span><strong>Nikola</strong><small>Salon Kosmetyczny</small></span>
+        <a href="#top" class="brand" aria-label="Nikola — Salon Piękności — strona główna">
+          <img class="footer-logo-img" src="images/nikola-logo-biale.png" alt="Nikola — Salon Piękności">
         </a>
         <p>Kameralny salon kosmetyczny w centrum Krakowa. Manicure, pedicure, makijaż i pielęgnacja twarzy w spokojnej, eleganckiej atmosferze.</p>
       </div>
