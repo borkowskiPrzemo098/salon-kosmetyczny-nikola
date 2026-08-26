@@ -253,13 +253,12 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (min-width:900px){ .hero{padding:216px 0 150px;} }
 
 .hero-bg{position:absolute;inset:0;z-index:0;}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 38%;display:block;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:68% 30%;display:block;}
 @media (max-width:640px){
-  /* Miejsce na inny kadr dla telefonu niż desktop (wąski, wysoki ekran
-     przycina znacznie więcej z boków niż szeroki desktop). Na razie to
-     samo kadrowanie co wyżej — podmień wartość, gdy będzie wiadomo,
-     który fragment zdjęcia ma być priorytetowy na mobile. */
-  .hero-bg img{object-position:center 38%;}
+  /* Wąski, wysoki ekran telefonu przycina znacznie więcej z boków niż
+     desktop — przesunięte mocniej w prawo/górę, żeby twarz i dłonie
+     zostały w kadrze zamiast pustego tła po lewej. */
+  .hero-bg img{object-position:78% 22%;}
 }
 .hero-bg::after{
   content:"";position:absolute;inset:0;
