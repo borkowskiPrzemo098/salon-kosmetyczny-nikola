@@ -272,9 +272,9 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
      kontener. Rozwiązanie: zdjęcie ograniczone do górnego pasa sekcji
      (mniej agresywny zoom, widać więcej kadru), reszta tekstu (przyciski,
      statystyki) ląduje już na jednolitym tle marki poniżej. */
-  .hero{background:var(--rose-900);}
+  .hero{background:linear-gradient(120deg,var(--rose-900),var(--rose-600));}
   .hero-bg{inset:auto 0 auto 0;top:var(--header-h);height:min(58vh,460px);}
-  .hero-bg img{object-position:62% 0%;}
+  .hero-bg img{object-position:62% 0%;transform:scale(1.15);transform-origin:50% 0%;}
   .hero-bg::after{
     background:linear-gradient(
       180deg,
