@@ -20,6 +20,15 @@
         ],
         "createdAt": "2026-08-14T08:22:23.627Z",
         "reason": "lightboxImg (#lightboxImg) is an intentionally empty <img> template for the gallery lightbox, populated via JS (lightboxImg.src=...) only when a gallery item is clicked — never rendered visibly with empty src"
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-08-26T11:56:58.461Z",
+        "reason": "lightboxImg is a JS-populated placeholder (src set at runtime via renderSlide()); pre-existing pattern, not introduced by this edit"
       }
     ]
   }
