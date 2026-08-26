@@ -300,20 +300,10 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
         var(--rose-900) 100%
       );
   }
-  /* Cień nie dawał wystarczającego kontrastu i wyglądał brudno — zamiast
-     tego: etykieta dostaje własne, stałe tło (plakietka), więc jej kontrast
-     nie zależy od jasności zdjęcia pod spodem; "zasługujesz" dostaje ten
-     sam biały co reszta nagłówka zamiast złota, które ginęło na jasnych
-     partiach fotki. */
-  .hero .eyebrow{
-    display:inline-block;
+  /* Sam kolor + mocny, wąski cień (1px, bez rozmycia) zamiast poświaty. */
+  .hero .eyebrow, .hero h1 em{
     color:#f7e6bd;
-    background:rgba(30,17,14,0.62);
-    padding:7px 16px;
-    border-radius:999px;
-  }
-  .hero h1 em{
-    color:#fff;
+    text-shadow:0 1px 1px rgba(0,0,0,0.9);
   }
 }
 
