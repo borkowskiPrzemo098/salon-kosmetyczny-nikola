@@ -253,21 +253,21 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
 @media (min-width:900px){ .hero{padding:216px 0 150px;} }
 
 .hero-bg{position:absolute;inset:0;z-index:0;}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:68% 30%;display:block;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:68% 15%;display:block;}
 @media (max-width:640px){
   /* Wąski, wysoki ekran telefonu przycina znacznie więcej z boków niż
-     desktop — przesunięte mocniej w prawo/górę, żeby twarz i dłonie
-     zostały w kadrze zamiast pustego tła po lewej. */
-  .hero-bg img{object-position:78% 22%;}
+     desktop — przesunięte mocniej w prawo, ale niżej (mniejsze Y), żeby
+     czoło nie ucinało się u góry kadru. */
+  .hero-bg img{object-position:78% 6%;}
 }
 .hero-bg::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(
     100deg,
-    rgba(63,38,32,0.94) 0%,
-    rgba(63,38,32,0.86) 32%,
-    rgba(63,38,32,0.62) 62%,
-    rgba(63,38,32,0.38) 100%
+    rgba(63,38,32,0.86) 0%,
+    rgba(63,38,32,0.78) 32%,
+    rgba(63,38,32,0.54) 62%,
+    rgba(63,38,32,0.30) 100%
   );
 }
 
