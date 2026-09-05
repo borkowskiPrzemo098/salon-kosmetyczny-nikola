@@ -470,6 +470,11 @@ section{padding:88px 0;}
   display:flex;gap:22px;flex:1;min-width:0;
   overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
   padding-bottom:2px;-webkit-overflow-scrolling:touch;
+  /* Bez tego palec przeciągający kartę mógł "porwać" przewijanie strony
+     w dowolnym kierunku (góra/dół/skos) zamiast tylko przesuwać opinie
+     w bok — pan-x ogranicza gest dotykowy wyłącznie do osi poziomej. */
+  touch-action:pan-x;
+  overscroll-behavior-x:contain;
 }
 .reviews-track{scrollbar-width:none;}
 .reviews-track::-webkit-scrollbar{display:none;}
