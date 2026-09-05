@@ -466,6 +466,21 @@ section{padding:88px 0;}
 
 /* ============ REVIEWS ============ */
 .reviews-carousel{display:flex;align-items:center;gap:14px;}
+@media (max-width:599px){
+  /* Na telefonie strzałki obok karty zabierały spory kawałek szerokości,
+     przez co sama karta (i tekst w niej) wychodziła bardzo wąska. Zamiast
+     tego strzałki "pływają" nad kartą (position:absolute), a karta dostaje
+     na pełną szerokość ekranu — bez zmiany wysokości. */
+  .reviews-carousel{position:relative;gap:0;}
+  .reviews-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+    background:rgba(63,38,32,0.82);box-shadow:0 6px 18px -8px rgba(0,0,0,0.4);}
+  .reviews-nav:active{transform:translateY(-50%) scale(0.9);}
+  .reviews-prev{left:6px;}
+  .reviews-next{right:6px;}
+  /* Odrobinę więcej marginesu po bokach karty, żeby pływające strzałki nie
+     nachodziły na gwiazdki/tekst przy samej krawędzi. */
+  .review-card{padding-left:40px;padding-right:40px;}
+}
 .reviews-track{
   display:flex;gap:22px;flex:1;min-width:0;
   overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
