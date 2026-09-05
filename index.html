@@ -119,6 +119,22 @@ button{font:inherit;cursor:pointer;}
   font-weight:600;
 }
 
+/* Lista usług w HERO — osobne elementy zamiast jednego ciągu tekstu, żeby
+   każda fraza (np. "Depilacja laserowa") łamała się w całości, a nie w
+   środku słowa, i żeby na telefonie dało się je ułożyć jedna pod drugą. */
+.hero-services{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  row-gap:6px;
+}
+.hero-services-item{white-space:nowrap;}
+.hero-services-item:not(:last-child)::after{content:" · ";}
+@media (max-width:640px){
+  .hero-services{flex-direction:column;align-items:flex-start;row-gap:4px;}
+  .hero-services-item:not(:last-child)::after{content:none;}
+}
+
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
 @media (min-width:900px){ .wrap{padding:0 48px;} }
 
@@ -708,7 +724,13 @@ footer ul a:hover{color:var(--gold-400);}
   </div>
   <div class="wrap">
     <div class="hero-content">
-      <span class="eyebrow reveal in">Manicure · Pedicure · Pielęgnacja twarzy · Rzęsy · Depilacja laserowa</span>
+      <span class="eyebrow hero-services reveal in">
+        <span class="hero-services-item">Manicure</span>
+        <span class="hero-services-item">Pedicure</span>
+        <span class="hero-services-item">Pielęgnacja twarzy</span>
+        <span class="hero-services-item">Rzęsy</span>
+        <span class="hero-services-item">Depilacja laserowa</span>
+      </span>
       <h1 class="reveal in reveal-delay-1">Piękno, na które <em>zasługujesz</em>, w sercu Kaszub</h1>
       <p class="lead reveal in reveal-delay-2">Piękno jest naszą pasją. Zapraszamy serdecznie każdego, kto chciałby cieszyć się pięknym wyglądem oraz świetnym samopoczuciem.</p>
       <div class="hero-actions reveal in reveal-delay-3">
