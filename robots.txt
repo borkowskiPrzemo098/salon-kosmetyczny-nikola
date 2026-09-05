@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://borkowskiprzemo098.github.io/stronatestowa1/sitemap.xml
+Sitemap: https://salonpieknoscinikola.pl/sitemap.xml
