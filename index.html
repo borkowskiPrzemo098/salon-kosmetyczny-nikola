@@ -265,7 +265,12 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
   position:relative;padding:170px 0 130px;overflow:hidden;
   color:#fff;
 }
-@media (min-width:900px){ .hero{padding:190px 0;} }
+@media (min-width:900px){
+  /* Nagłówek jest position:fixed i nakłada się na górę sekcji HERO, więc
+     "zjada" część padding-top wizualnie — trzeba doliczyć jego wysokość,
+     żeby realnie widoczny odstęp góra/dół był symetryczny. */
+  .hero{padding:calc(var(--header-h) + 150px) 0 150px;}
+}
 
 .hero-bg{position:absolute;inset:0;z-index:0;}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:68% 15%;display:block;}
