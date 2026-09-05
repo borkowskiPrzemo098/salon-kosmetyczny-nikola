@@ -305,6 +305,22 @@ nav.links a:hover::after,nav.links a:focus-visible::after{right:0;}
     );
   }
   .hero-bg{inset:auto 0 auto 0;top:calc(var(--header-h) - 10px);height:min(58vh,460px);}
+  /* `vh` przelicza się na nowo, gdy pasek adresu przeglądarki chowa się przy
+     scrollu (dostępna wysokość nagle rośnie) — stąd skokowe powiększenie.
+     `svh` zakłada zawsze najmniejszy możliwy viewport (pasek widoczny), więc
+     jest stabilne. Przeglądarki bez wsparcia svh po prostu zignorują te
+     reguły i zostaną przy wersji na vh powyżej. */
+  @supports (height: 1svh){
+    .hero{
+      background:linear-gradient(
+        180deg,
+        var(--rose-900) 0,
+        var(--rose-900) calc(var(--header-h) - 10px + min(58svh,460px)),
+        var(--rose-600) 100%
+      );
+    }
+    .hero-bg{height:min(58svh,460px);}
+  }
   .hero-bg img{object-position:62% 0%;}
   .hero-bg::after{
     /* dwie warstwy: pozioma rozjaśnia prawą stronę zdjęcia (przezroczysta od
